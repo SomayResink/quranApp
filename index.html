@@ -110,6 +110,75 @@
         .nav-item:hover:not(.active) {
             background-color: #F0F2E8;
         }
+
+        /* Hamburger Menu Styles */
+        .hamburger-menu {
+            display: none;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-nav-item {
+            display: block;
+            padding: 1rem 2rem;
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #5A6752;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            width: 200px;
+            text-align: center;
+        }
+
+        .mobile-nav-item.active {
+            background-color: #A8B38C;
+            color: white;
+        }
+
+        .mobile-nav-item:hover {
+            background-color: #F0F2E8;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #5A6752;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none !important;
+            }
+
+            .hamburger-menu {
+                display: block;
+            }
+        }
     </style>
 </head>
 
@@ -127,8 +196,9 @@
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-4">
-                    <div class="hidden md:flex space-x-1 bg-white/90 rounded-lg p-1">
+                <!-- Desktop Navigation -->
+                <div class="desktop-nav flex items-center space-x-4">
+                    <div class="flex space-x-1 bg-white/90 rounded-lg p-1">
                         <a href="#home" class="nav-item px-4 py-2 rounded-md active">
                             <i class="fas fa-home mr-2"></i>Beranda
                         </a>
@@ -137,6 +207,9 @@
                         </a>
                         <a href="#progress" class="nav-item px-4 py-2 rounded-md">
                             <i class="fas fa-chart-pie mr-2"></i>Progress
+                        </a>
+                        <a href="pencapaian.html" class="nav-item px-4 py-2 rounded-md">
+                            <i class="fas fa-trophy mr-2"></i>Pencapaian
                         </a>
                     </div>
 
@@ -150,9 +223,48 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- Mobile Hamburger Menu -->
+                <div class="hamburger-menu flex items-center space-x-2">
+                    <div class="flex items-center space-x-2 bg-white rounded-full pl-2 pr-4 py-1 mr-2">
+                        <div class="bg-primary rounded-full p-2 flex items-center justify-center">
+                            <span class="text-white text-sm font-bold" id="mobile-user-initial">U</span>
+                        </div>
+                        <span class="font-medium text-dark" id="mobile-username-display">User</span>
+                    </div>
+                    <button id="hamburger-btn" class="bg-white text-dark p-2 rounded-lg">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="mobile-menu">
+        <button id="close-menu" class="close-menu">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <a href="#home" class="mobile-nav-item active" data-page="home">
+            <i class="fas fa-home mr-3"></i>Beranda
+        </a>
+        <a href="#diary" class="mobile-nav-item" data-page="diary">
+            <i class="fas fa-book-open mr-3"></i>Diary
+        </a>
+        <a href="#progress" class="mobile-nav-item" data-page="progress">
+            <i class="fas fa-chart-pie mr-3"></i>Progress
+        </a>
+        <a href="pencapaian.html" class="mobile-nav-item">
+            <i class="fas fa-trophy mr-3"></i>Pencapaian
+        </a>
+        
+        <div class="mt-8 pt-6 border-t border-gray-200">
+            <button id="mobile-logout-btn" class="mobile-nav-item text-red-500">
+                <i class="fas fa-sign-out-alt mr-3"></i>Logout
+            </button>
+        </div>
+    </div>
 
     <!-- Main App Pages -->
     <div id="app-pages">
@@ -214,15 +326,14 @@
                         <p class="text-sm text-gray-600 mt-2">Lihat catatan sebelumnya</p>
                     </div>
 
-                <!-- Ganti card Pencapaian di quick actions -->
-<div class="bg-white rounded-xl shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow duration-300"
-    onclick="window.location.href='pencapaian.html'">
-    <div class="text-primary text-3xl mb-3">
-        <i class="fas fa-trophy"></i>
-    </div>
-    <h3 class="text-lg font-semibold text-dark">Pencapaian</h3>
-    <p class="text-sm text-gray-600 mt-2">Lihat pencapaianmu</p>
-</div>
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                        onclick="window.location.href='achievements.html'">
+                        <div class="text-primary text-3xl mb-3">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">Pencapaian</h3>
+                        <p class="text-sm text-gray-600 mt-2">Lihat pencapaianmu</p>
+                    </div>
                 </div>
 
                 <!-- Recent Activity & Ayat Inspirasi -->
@@ -582,6 +693,7 @@
             updateUserDisplay();
             initializeApp();
             setupNavigation();
+            setupMobileMenu();
         });
 
         // Update user display
@@ -589,38 +701,82 @@
             if (currentUser) {
                 const userInitial = document.getElementById('user-initial');
                 const usernameDisplay = document.getElementById('username-display');
+                const mobileUserInitial = document.getElementById('mobile-user-initial');
+                const mobileUsernameDisplay = document.getElementById('mobile-username-display');
                 const welcomeName = document.getElementById('welcome-name');
                 
                 if (userInitial) userInitial.textContent = currentUser.name.charAt(0).toUpperCase();
                 if (usernameDisplay) usernameDisplay.textContent = currentUser.name;
+                if (mobileUserInitial) mobileUserInitial.textContent = currentUser.name.charAt(0).toUpperCase();
+                if (mobileUsernameDisplay) mobileUsernameDisplay.textContent = currentUser.name;
                 if (welcomeName) welcomeName.textContent = currentUser.name;
             }
         }
 
         // Handle logout
-        document.getElementById('logout-btn').addEventListener('click', function() {
+        document.getElementById('logout-btn').addEventListener('click', handleLogout);
+        document.getElementById('mobile-logout-btn').addEventListener('click', handleLogout);
+
+        function handleLogout() {
             localStorage.removeItem('currentUser');
             showNotification('Berhasil logout', 'success');
             setTimeout(() => {
                 window.location.href = 'login.html';
             }, 1000);
-        });
+        }
+
+        // Setup mobile menu
+        function setupMobileMenu() {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeMenu = document.getElementById('close-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+            // Open mobile menu
+            hamburgerBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+            });
+
+            // Close mobile menu
+            closeMenu.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+            });
+
+            // Handle mobile navigation
+            mobileNavItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href').substring(1);
+                        switchPage(targetId);
+                        
+                        // Update active states
+                        mobileNavItems.forEach(nav => nav.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Close mobile menu
+                        mobileMenu.classList.remove('active');
+                    }
+                });
+            });
+
+            // Close menu when clicking outside
+            mobileMenu.addEventListener('click', function(e) {
+                if (e.target === mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        }
 
         // Setup navigation
         function setupNavigation() {
-            // Navigation handling
+            // Desktop navigation handling
             document.querySelectorAll('a[href^="#"]').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href').substring(1);
                     
-                    // Hide all pages
-                    document.querySelectorAll('.page-section').forEach(page => {
-                        page.classList.remove('active');
-                    });
-                    
-                    // Show target page
-                    document.getElementById(`${targetId}-page`).classList.add('active');
+                    switchPage(targetId);
                     
                     // Update active nav item
                     document.querySelectorAll('.nav-item').forEach(nav => {
@@ -642,6 +798,17 @@
             });
         }
 
+        // Switch page function
+        function switchPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show target page
+            document.getElementById(`${pageName}-page`).classList.add('active');
+        }
+
         // Initialize app features
         function initializeApp() {
             loadSurahList();
@@ -661,7 +828,6 @@
         // Placeholder functions
         function loadSurahList() {
             console.log('Loading surah list...');
-            // Add some sample surahs
             const surahSelect = document.getElementById('surah');
             const sampleSurahs = [
                 'Al-Fatihah', 'Al-Baqarah', 'Ali Imran', 'An-Nisa', 'Al-Maidah',
@@ -678,7 +844,6 @@
 
         function loadRandomVerse() {
             console.log('Loading random verse...');
-            // This would typically call an API
             showNotification('Ayat inspirasi diperbarui!', 'success');
         }
 
@@ -695,9 +860,7 @@
         function handleDiarySubmit(e) {
             e.preventDefault();
             showNotification('Entri diary berhasil disimpan!', 'success');
-            // Reset form
             document.getElementById('daily-diary-form').reset();
-            // Reset mood to default
             document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('active'));
             document.querySelectorAll('.mood-option')[2].classList.add('active');
         }
@@ -707,19 +870,16 @@
         }
 
         function updateStreak() {
-            // Simple streak calculation
             const streak = Math.floor(Math.random() * 10);
             document.getElementById('streak-count').textContent = streak;
         }
 
         function updateStats() {
-            // Sample data
             document.getElementById('total-juz').textContent = '2';
             document.getElementById('total-surah').textContent = '5';
         }
 
         function updateRecentEntries() {
-            // Sample recent entries
             const recentEntries = document.getElementById('recent-entries');
             recentEntries.innerHTML = `
                 <div class="journal-entry p-4 rounded-lg fade-in">
@@ -739,7 +899,6 @@
         }
 
         function updateProgressBars() {
-            // Sample progress data
             document.getElementById('daily-progress').style.width = '60%';
             document.getElementById('daily-percent').textContent = '60%';
             document.getElementById('daily-current').textContent = '3 ayat';
