@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qur'an Tracker - Digital Hafalan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00796b',
+                        secondary: '#004d40',
+                        accent: '#4db6ac',
+                        light: '#e0f2f1',
+                        gold: '#d4af37'
+                    },
+                    fontFamily: {
+                        'arabic': ['Amiri', 'serif'],
+                        'body': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            text-align: right;
+            direction: rtl;
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card-hover {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col font-body">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-primary to-secondary text-white shadow-lg sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <div class="bg-white p-2 rounded-full">
+                        <i class="fas fa-book-quran text-3xl text-primary"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">Qur'an Tracker</h1>
+                        <p class="text-light">Buku Catatan Hafalan Digital</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex space-x-2">
+                        <div class="bg-white/20 rounded-lg px-3 py-1">
+                            <span id="current-date" class="text-sm"></span>
+                        </div>
+                        <div class="bg-white/20 rounded-lg px-3 py-1">
+                            <span id="hijri-date" class="text-sm"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white/20 rounded-full pl-2 pr-4 py-1">
+                        <div class="bg-white rounded-full p-1">
+                            <i class="fas fa-user text-primary text-sm"></i>
+                        </div>
+                        <span class="font-medium">Pengguna</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        <!-- Stats Overview -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                <div class="text-accent text-3xl mb-2">
+                    <i class="fas fa-calendar-day"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-700">Hari Ini</h3>
+                <p class="text-2xl font-bold text-primary" id="today-count">0 Ayat</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                <div class="text-accent text-3xl mb-2">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-700">Minggu Ini</h3>
+                <p class="text-2xl font-bold text-primary" id="week-count">0 Ayat</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                <div class="text-accent text-3xl mb-2">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-700">Total</h3>
+                <p class="text-2xl font-bold text-primary" id="total-count">0 Ayat</p>
+            </div>
+        </section>
+
+        <!-- Daily Log -->
+        <section class="bg-white rounded-xl shadow-lg mb-8 card-hover">
+            <div class="p-6 border-b border-gray-200">
+                <h2 class="text-xl font-bold text-primary flex items-center">
+                    <i class="fas fa-pen-fancy mr-2"></i> Catatan Harian
+                </h2>
+            </div>
+            <div class="p-6">
+                <form id="daily-log-form">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="surah" class="block text-gray-700 mb-2 font-medium">Surah</label>
+                            <select id="surah" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300">
+                                <option value="">Pilih Surah</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="recitation-type" class="block text-gray-700 mb-2 font-medium">Jenis</label>
+                            <select id="recitation-type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300">
+                                <option value="hafalan">Hafalan Baru</option>
+                                <option value="murajaah">Murajaah (Pengulangan)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="start-ayat" class="block text-gray-700 mb-2 font-medium">Ayat Mulai</label>
+                            <input type="number" id="start-ayat" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300" placeholder="1" min="1">
+                        </div>
+                        <div>
+                            <label for="end-ayat" class="block text-gray-700 mb-2 font-medium">Ayat Selesai</label>
+                            <input type="number" id="end-ayat" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300" placeholder="5" min="1">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="notes" class="block text-gray-700 mb-2 font-medium">Catatan (Opsional)</label>
+                        <textarea id="notes" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300" placeholder="Tulis catatan tentang hafalan hari ini..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white font-medium py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center shadow-md">
+                        <i class="fas fa-save mr-2"></i> Simpan Hafalan Hari Ini
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Targets & Progress -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Targets -->
+            <section class="bg-white rounded-xl shadow-lg card-hover">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-bold text-primary flex items-center">
+                        <i class="fas fa-bullseye mr-2"></i> Target Hafalan
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <form id="target-form">
+                        <div class="mb-4">
+                            <label for="target-type" class="block text-gray-700 mb-2 font-medium">Jenis Target</label>
+                            <select id="target-type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300">
+                                <option value="weekly">Mingguan</option>
+                                <option value="monthly">Bulanan</option>
+                                <option value="custom">Kustom</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="target-description" class="block text-gray-700 mb-2 font-medium">Deskripsi Target</label>
+                            <textarea id="target-description" rows="2" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300" placeholder="Tulis target hafalan Anda..."></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="target-amount" class="block text-gray-700 mb-2 font-medium">Jumlah Ayat</label>
+                            <input type="number" id="target-amount" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300" placeholder="10" min="1">
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white font-medium py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center shadow-md">
+                            <i class="fas fa-bullseye mr-2"></i> Set Target
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Progress -->
+            <section class="bg-white rounded-xl shadow-lg card-hover">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-bold text-primary flex items-center">
+                        <i class="fas fa-chart-pie mr-2"></i> Progres Hafalan
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700 font-medium">Target Mingguan</span>
+                            <span class="text-gray-700 font-medium" id="weekly-percent">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div id="weekly-progress" class="bg-gradient-to-r from-accent to-primary h-4 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between mt-1">
+                            <span class="text-sm text-gray-500" id="weekly-current">0 ayat</span>
+                            <span class="text-sm text-gray-500" id="weekly-target">0 ayat</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700 font-medium">Target Bulanan</span>
+                            <span class="text-gray-700 font-medium" id="monthly-percent">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div id="monthly-progress" class="bg-gradient-to-r from-accent to-primary h-4 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between mt-1">
+                            <span class="text-sm text-gray-500" id="monthly-current">0 ayat</span>
+                            <span class="text-sm text-gray-500" id="monthly-target">0 ayat</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center mt-4">
+                        <div class="relative w-32 h-32">
+                            <svg class="w-full h-full" viewBox="0 0 36 36">
+                                <path class="stroke-gray-200 fill-none stroke-2"
+                                    d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                                <path id="total-progress-circle" class="stroke-primary fill-none stroke-2 transition-all duration-1000"
+                                    stroke-dasharray="100, 100"
+                                    d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                                <text x="18" y="20.5" class="text-4 font-bold fill-primary text-center" text-anchor="middle" dominant-baseline="central">0%</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Recent Activity & Ayat Pilihan -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Recent Activity -->
+            <section class="bg-white rounded-xl shadow-lg card-hover">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-bold text-primary flex items-center">
+                        <i class="fas fa-history mr-2"></i> Aktivitas Terbaru
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div id="recent-activity" class="space-y-4">
+                        <div class="text-center py-8 text-gray-500">
+                            <i class="fas fa-history text-4xl mb-3"></i>
+                            <p>Belum ada hafalan yang tercatat.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ayat Pilihan -->
+            <section class="bg-gradient-to-br from-primary to-secondary rounded-xl shadow-lg text-white card-hover">
+                <div class="p-6 border-b border-white/20">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-star mr-2"></i> Ayat Pilihan Hari Ini
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div id="random-verse" class="text-center">
+                        <div class="arabic-text mb-4 text-white/90" id="arabic-verse">
+                            يَـٰٓأَيُّهَا ٱلنَّاسُ قَدْ جَآءَتْكُم مَّوْعِظَةٌ مِّن رَّبِّكُمْ وَشِفَآءٌ لِّمَا فِى ٱلصُّدُورِ وَهُدًى وَرَحْمَةٌ لِّلْمُؤْمِنِينَ
+                        </div>
+                        <div class="text-light mb-4 italic" id="verse-translation">
+                            "Wahai manusia! Sungguh, telah datang kepadamu pelajaran (Al-Qur'an) dari Tuhanmu, penyembuh bagi penyakit yang ada dalam dada dan petunjuk serta rahmat bagi orang yang beriman."
+                        </div>
+                        <div class="font-medium" id="verse-reference">
+                            (Yunus: 57)
+                        </div>
+                        <button id="new-verse-btn" class="mt-4 bg-white text-primary hover:bg-light font-medium py-2 px-4 rounded-lg transition duration-300">
+                            <i class="fas fa-random mr-2"></i> Ayat Lainnya
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-primary to-secondary text-white py-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0 text-center md:text-left">
+                    <p class="text-light">&copy; 2025 Qur'an Tracker - Buku Catatan Hafalan Digital</p>
+                    <p class="text-light text-sm mt-1">Dibuat dengan <i class="fas fa-heart text-red-400"></i> untuk umat Islam</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-light hover:text-white transition duration-300 bg-white/10 p-2 rounded-full">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-light hover:text-white transition duration-300 bg-white/10 p-2 rounded-full">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-light hover:text-white transition duration-300 bg-white/10 p-2 rounded-full">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data storage
+        let memorizations = JSON.parse(localStorage.getItem('memorizations')) || [];
+        let targets = JSON.parse(localStorage.getItem('targets')) || {
+            weekly: { target: 20, current: 0 },
+            monthly: { target: 80, current: 0 }
+        };
+        let surahList = [];
+
+        // DOM Elements
+        const surahSelect = document.getElementById('surah');
+        const dailyForm = document.getElementById('daily-log-form');
+        const targetForm = document.getElementById('target-form');
+        const recentActivity = document.getElementById('recent-activity');
+        const newVerseBtn = document.getElementById('new-verse-btn');
+        const arabicVerse = document.getElementById('arabic-verse');
+        const verseTranslation = document.getElementById('verse-translation');
+        const verseReference = document.getElementById('verse-reference');
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current date
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString('id-ID', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Set Hijri date (placeholder - in a real app, use a proper Hijri API)
+            document.getElementById('hijri-date').textContent = "1445 H";
+            
+            // Load surah list
+            loadSurahList();
+            
+            // Load memorizations and update UI
+            updateStats();
+            updateRecentActivity();
+            updateProgressBars();
+            
+            // Load a random verse
+            loadRandomVerse();
+        });
+
+        // Load surah list from API
+        async function loadSurahList() {
+            try {
+                const response = await fetch('https://api.alquran.cloud/v1/surah');
+                const data = await response.json();
+                surahList = data.data;
+                
+                // Populate surah dropdown
+                surahList.forEach(surah => {
+                    const option = document.createElement('option');
+                    option.value = surah.number;
+                    option.textContent = `${surah.number}. ${surah.englishName} (${surah.name})`;
+                    surahSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading surah list:', error);
+                // Fallback to a static list if API fails
+                const fallbackSurahs = [
+                    { number: 1, englishName: "Al-Fatihah", name: "الفاتحة" },
+                    { number: 2, englishName: "Al-Baqarah", name: "البقرة" },
+                    { number: 36, englishName: "Ya-Sin", name: "يس" },
+                    { number: 55, englishName: "Ar-Rahman", name: "الرحمن" },
+                    { number: 67, englishName: "Al-Mulk", name: "الملك" },
+                    { number: 112, englishName: "Al-Ikhlas", name: "الإخلاص" }
+                ];
+                
+                fallbackSurahs.forEach(surah => {
+                    const option = document.createElement('option');
+                    option.value = surah.number;
+                    option.textContent = `${surah.number}. ${surah.englishName} (${surah.name})`;
+                    surahSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Load a random verse from API
+        async function loadRandomVerse() {
+            try {
+                // Get a random surah (1-114)
+                const randomSurah = Math.floor(Math.random() * 114) + 1;
+                
+                // Get surah info to know how many verses it has
+                const surahInfoResponse = await fetch(`https://api.alquran.cloud/v1/surah/${randomSurah}`);
+                const surahInfo = await surahInfoResponse.json();
+                const verseCount = surahInfo.data.numberOfAyahs;
+                
+                // Get a random verse from that surah
+                const randomVerse = Math.floor(Math.random() * verseCount) + 1;
+                
+                // Fetch the verse
+                const response = await fetch(`https://api.alquran.cloud/v1/ayah/${randomSurah}:${randomVerse}/editions/quran-uthmani,id.indonesian`);
+                const data = await response.json();
+                
+                if (data.code === 200 && data.data.length >= 2) {
+                    arabicVerse.textContent = data.data[0].text;
+                    verseTranslation.textContent = `"${data.data[1].text}"`;
+                    verseReference.textContent = `(${surahInfo.data.englishName} ${randomSurah}:${randomVerse})`;
+                }
+            } catch (error) {
+                console.error('Error loading random verse:', error);
+                // Fallback verse if API fails
+                arabicVerse.textContent = "يَـٰٓأَيُّهَا ٱلنَّاسُ قَدْ جَآءَتْكُم مَّوْعِظَةٌ مِّن رَّبِّكُمْ وَشِفَآءٌ لِّمَا فِى ٱلصُّدُورِ وَهُدًى وَرَحْمَةٌ لِّلْمُؤْمِنِينَ";
+                verseTranslation.textContent = '"Wahai manusia! Sungguh, telah datang kepadamu pelajaran (Al-Qur\'an) dari Tuhanmu, penyembuh bagi penyakit yang ada dalam dada dan petunjuk serta rahmat bagi orang yang beriman."';
+                verseReference.textContent = "(Yunus: 57)";
+            }
+        }
+
+        // Handle daily form submission
+        dailyForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const surahNumber = parseInt(surahSelect.value);
+            const startAyat = parseInt(document.getElementById('start-ayat').value);
+            const endAyat = parseInt(document.getElementById('end-ayat').value);
+            const type = document.getElementById('recitation-type').value;
+            const notes = document.getElementById('notes').value;
+            
+            if (!surahNumber || !startAyat || !endAyat) {
+                alert('Harap isi semua field yang diperlukan!');
+                return;
+            }
+            
+            if (endAyat < startAyat) {
+                alert('Ayat selesai harus lebih besar atau sama dengan ayat mulai!');
+                return;
+            }
+            
+            const selectedSurah = surahList.find(s => s.number === surahNumber);
+            const ayatCount = endAyat - startAyat + 1;
+            
+            // Create memorization record
+            const memorization = {
+                id: Date.now(),
+                date: new Date().toISOString(),
+                surah: selectedSurah ? selectedSurah.englishName : `Surah ${surahNumber}`,
+                surahNumber: surahNumber,
+                startAyat: startAyat,
+                endAyat: endAyat,
+                ayatCount: ayatCount,
+                type: type,
+                notes: notes
+            };
+            
+            // Add to memorizations
+            memorizations.unshift(memorization);
+            localStorage.setItem('memorizations', JSON.stringify(memorizations));
+            
+            // Update targets
+            targets.weekly.current += ayatCount;
+            targets.monthly.current += ayatCount;
+            localStorage.setItem('targets', JSON.stringify(targets));
+            
+            // Update UI
+            updateStats();
+            updateRecentActivity();
+            updateProgressBars();
+            
+            // Reset form
+            dailyForm.reset();
+            
+            // Show success message
+            showNotification(`Hafalan ${selectedSurah ? selectedSurah.englishName : `Surah ${surahNumber}`} ayat ${startAyat}-${endAyat} berhasil dicatat!`, 'success');
+        });
+
+        // Handle target form submission
+        targetForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const targetType = document.getElementById('target-type').value;
+            const targetAmount = parseInt(document.getElementById('target-amount').value);
+            const description = document.getElementById('target-description').value;
+            
+            if (!targetAmount) {
+                alert('Harap masukkan jumlah ayat target!');
+                return;
+            }
+            
+            // Update target
+            if (targetType === 'weekly') {
+                targets.weekly.target = targetAmount;
+            } else if (targetType === 'monthly') {
+                targets.monthly.target = targetAmount;
+            }
+            
+            localStorage.setItem('targets', JSON.stringify(targets));
+            
+            // Update UI
+            updateProgressBars();
+            
+            // Reset form
+            targetForm.reset();
+            
+            // Show success message
+            showNotification(`Target ${targetType === 'weekly' ? 'mingguan' : 'bulanan'} berhasil diupdate!`, 'success');
+        });
+
+        // Load new random verse
+        newVerseBtn.addEventListener('click', loadRandomVerse);
+
+        // Update statistics
+        function updateStats() {
+            const today = new Date().toDateString();
+            const todayMemorizations = memorizations.filter(m => new Date(m.date).toDateString() === today);
+            const todayCount = todayMemorizations.reduce((sum, m) => sum + m.ayatCount, 0);
+            
+            // Calculate week count (last 7 days)
+            const weekAgo = new Date();
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            const weekMemorizations = memorizations.filter(m => new Date(m.date) >= weekAgo);
+            const weekCount = weekMemorizations.reduce((sum, m) => sum + m.ayatCount, 0);
+            
+            // Calculate total count
+            const totalCount = memorizations.reduce((sum, m) => sum + m.ayatCount, 0);
+            
+            // Update DOM
+            document.getElementById('today-count').textContent = `${todayCount} Ayat`;
+            document.getElementById('week-count').textContent = `${weekCount} Ayat`;
+            document.getElementById('total-count').textContent = `${totalCount} Ayat`;
+        }
+
+        // Update recent activity
+        function updateRecentActivity() {
+            if (memorizations.length === 0) {
+                recentActivity.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fas fa-history text-4xl mb-3"></i>
+                        <p>Belum ada hafalan yang tercatat.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const recentItems = memorizations.slice(0, 5).map(m => {
+                const date = new Date(m.date);
+                const dateStr = date.toLocaleDateString('id-ID', { 
+                    day: 'numeric', 
+                    month: 'short' 
+                });
+                
+                return `
+                    <div class="flex items-start space-x-4 p-3 bg-light rounded-lg fade-in">
+                        <div class="bg-primary text-white rounded-full p-2 flex-shrink-0">
+                            <i class="fas ${m.type === 'hafalan' ? 'fa-book' : 'fa-redo'}"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="font-semibold text-gray-800">${m.surah} ${m.startAyat}-${m.endAyat}</h4>
+                            <p class="text-sm text-gray-600">${m.notes || 'Tidak ada catatan'}</p>
+                        </div>
+                        <div class="text-right flex-shrink-0">
+                            <span class="text-sm text-gray-500">${dateStr}</span>
+                            <div class="text-xs bg-accent text-white px-2 py-1 rounded-full mt-1">${m.ayatCount} ayat</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            recentActivity.innerHTML = recentItems;
+        }
+
+        // Update progress bars
+        function updateProgressBars() {
+            // Weekly progress
+            const weeklyPercent = Math.min(100, (targets.weekly.current / targets.weekly.target) * 100);
+            document.getElementById('weekly-progress').style.width = `${weeklyPercent}%`;
+            document.getElementById('weekly-percent').textContent = `${Math.round(weeklyPercent)}%`;
+            document.getElementById('weekly-current').textContent = `${targets.weekly.current} ayat`;
+            document.getElementById('weekly-target').textContent = `${targets.weekly.target} ayat`;
+            
+            // Monthly progress
+            const monthlyPercent = Math.min(100, (targets.monthly.current / targets.monthly.target) * 100);
+            document.getElementById('monthly-progress').style.width = `${monthlyPercent}%`;
+            document.getElementById('monthly-percent').textContent = `${Math.round(monthlyPercent)}%`;
+            document.getElementById('monthly-current').textContent = `${targets.monthly.current} ayat`;
+            document.getElementById('monthly-target').textContent = `${targets.monthly.target} ayat`;
+            
+            // Total progress (simulated)
+            const totalPercent = Math.min(100, (memorizations.reduce((sum, m) => sum + m.ayatCount, 0) / 6236) * 100);
+            const circle = document.querySelector('#total-progress-circle');
+            const circumference = 2 * Math.PI * 15.9155;
+            const offset = circumference - (totalPercent / 100) * circumference;
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            circle.style.strokeDashoffset = offset;
+            document.querySelector('#total-progress-circle + text').textContent = `${Math.round(totalPercent)}%`;
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 fade-in ${
+                type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            // Add to DOM
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('fade-in');
+                notification.classList.add('fade-out');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
