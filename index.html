@@ -1,1069 +1,777 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Qur'an Diary - Jurnal Hafalan Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: "#8B4513",
-              secondary: "#D2691E",
-              accent: "#CD853F",
-              light: "#FAEBD7",
-              cream: "#FFF8DC",
-              sage: "#87A96B",
-              gold: "#D4AF37",
-              deepgreen: "#2E8B57",
-            },
-            fontFamily: {
-              arabic: ["Amiri", "serif"],
-              display: ["Playfair Display", "serif"],
-              body: ["Poppins", "sans-serif"],
-            },
-            backgroundImage: {
-              "paper-texture":
-                'url(\'data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z" fill="%23f5f5f5" fill-opacity="0.4" fill-rule="evenodd"/%3E%3C/svg%3E\')',
-              "islamic-pattern":
-                'url(\'data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%238B4513" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\')',
-            },
-          },
-        },
-      };
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C1C4A4',
+                        secondary: '#A8B38C',
+                        accent: '#8A9B6E',
+                        light: '#F0F2E8',
+                        cream: '#F8F9F5',
+                        sage: '#7D8C5F',
+                        gold: '#B5A369',
+                        deepgreen: '#6B7D4A',
+                        dark: '#5A6752'
+                    },
+                    fontFamily: {
+                        'arabic': ['Amiri', 'serif'],
+                        'display': ['Playfair Display', 'serif'],
+                        'body': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
     </script>
     <style>
-      .arabic-text {
-        font-family: "Amiri", serif;
-        font-size: 1.5rem;
-        line-height: 2.5rem;
-        text-align: right;
-        direction: rtl;
-      }
-      .journal-entry {
-        background: linear-gradient(to right, #faebd7, #fff8dc);
-        border-left: 4px solid #8b4513;
-        box-shadow: 0 4px 6px rgba(139, 69, 19, 0.1);
-      }
-      .sticker {
-        background: rgba(255, 255, 255, 0.7);
-        border-radius: 50%;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      }
-      .floating-btn {
-        box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
-        transition: all 0.3s ease;
-      }
-      .floating-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
-      }
-      .mood-selector .mood-option {
-        transition: all 0.2s ease;
-      }
-      .mood-selector .mood-option:hover,
-      .mood-selector .mood-option.active {
-        transform: scale(1.1);
-        background-color: #faebd7;
-      }
-      .fade-in {
-        animation: fadeIn 0.5s ease-in;
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            text-align: right;
+            direction: rtl;
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
+
+        .journal-entry {
+            background: linear-gradient(to right, #F0F2E8, #F8F9F5);
+            border-left: 4px solid #C1C4A4;
         }
-      }
-      .page-turn {
-        animation: pageTurn 0.6s ease-out;
-      }
-      @keyframes pageTurn {
-        0% {
-          transform: rotateY(0deg);
+
+        .sticker {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
         }
-        50% {
-          transform: rotateY(90deg);
+
+        .floating-btn {
+            transition: all 0.3s ease;
         }
-        100% {
-          transform: rotateY(0deg);
+
+        .floating-btn:hover {
+            transform: translateY(-2px);
         }
-      }
+
+        .mood-selector .mood-option {
+            transition: all 0.2s ease;
+        }
+
+        .mood-selector .mood-option:hover,
+        .mood-selector .mood-option.active {
+            transform: scale(1.1);
+            background-color: #F0F2E8;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        .nav-item {
+            transition: all 0.3s ease;
+            color: #5A6752;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-item.active {
+            background-color: #A8B38C;
+            color: white;
+        }
+
+        .nav-item:hover:not(.active) {
+            background-color: #F0F2E8;
+        }
     </style>
-  </head>
-  <body class="bg-cream min-h-screen flex flex-col font-body bg-paper-texture">
-    <!-- Header -->
-    <header
-      class="bg-gradient-to-r from-primary to-secondary text-white shadow-lg sticky top-0 z-10"
-    >
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <div class="flex items-center space-x-4 mb-4 md:mb-0">
-            <div class="bg-white p-3 rounded-full shadow-lg">
-              <i class="fas fa-book-quran text-2xl text-primary"></i>
+</head>
+
+<body class="bg-cream min-h-screen flex flex-col font-body">
+    <!-- Navigation -->
+    <nav class="bg-primary shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white p-2 rounded-full">
+                        <i class="fas fa-book-quran text-xl text-primary"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-display font-bold text-dark">My Qur'an Diary</h1>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex space-x-1 bg-white/90 rounded-lg p-1">
+                        <a href="#home" class="nav-item px-4 py-2 rounded-md active">
+                            <i class="fas fa-home mr-2"></i>Beranda
+                        </a>
+                        <a href="#diary" class="nav-item px-4 py-2 rounded-md">
+                            <i class="fas fa-book-open mr-2"></i>Diary
+                        </a>
+                        <a href="#progress" class="nav-item px-4 py-2 rounded-md">
+                            <i class="fas fa-chart-pie mr-2"></i>Progress
+                        </a>
+                    </div>
+
+                    <div class="flex items-center space-x-2 bg-white rounded-full pl-2 pr-4 py-1">
+                        <div class="bg-primary rounded-full p-2 flex items-center justify-center">
+                            <span class="text-white text-sm font-bold" id="user-initial">U</span>
+                        </div>
+                        <span class="font-medium text-dark" id="username-display">User</span>
+                        <button id="logout-btn" class="ml-2 text-dark hover:text-sage">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div>
-              <h1 class="text-2xl font-display font-bold">My Qur'an Diary</h1>
-              <p class="text-light">Jurnal Hafalan Digital Pribadi</p>
-            </div>
-          </div>
-          <div class="flex items-center space-x-4">
-            <div class="hidden md:flex space-x-2">
-              <div class="bg-white/20 rounded-lg px-3 py-1 backdrop-blur-sm">
-                <span id="current-date" class="text-sm"></span>
-              </div>
-              <div class="bg-white/20 rounded-lg px-3 py-1 backdrop-blur-sm">
-                <span id="hijri-date" class="text-sm"></span>
-              </div>
-            </div>
-            <!-- Langsung ganti di header (hapus yang lama, ganti dengan ini) -->
-            <div
-              class="flex items-center space-x-2 bg-white/20 rounded-full pl-2 pr-4 py-1 backdrop-blur-sm"
-            >
-              <div
-                class="bg-white rounded-full p-2 flex items-center justify-center"
-              >
-                <span id="user-initial" class="text-primary text-sm font-bold"
-                  >U</span
-                >
-              </div>
-              <span id="username" class="font-medium">User</span>
-            </div>
-          </div>
         </div>
-      </div>
-    </header>
+    </nav>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8 flex-grow">
-      <!-- Welcome & Quick Stats -->
-      <section class="mb-8">
-        <div
-          class="bg-white rounded-2xl shadow-md p-6 journal-entry relative overflow-hidden"
-        >
-          <div
-            class="absolute -top-4 -right-4 w-24 h-24 bg-accent/10 rounded-full"
-          ></div>
-          <div
-            class="absolute -bottom-6 -left-6 w-20 h-20 bg-deepgreen/10 rounded-full"
-          ></div>
-
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-4 md:mb-0">
-              <h2 class="text-xl font-display font-bold text-primary">
-                Assalamu'alaikum!
-              </h2>
-              <p class="text-gray-600">
-                Selamat datang di jurnal hafalan Qur'an-mu
-              </p>
-            </div>
-            <div class="flex space-x-4 text-center">
-              <div>
-                <div class="text-2xl font-bold text-primary" id="streak-count">
-                  0
-                </div>
-                <div class="text-xs text-gray-500">Hari Beruntun</div>
-              </div>
-              <div>
-                <div class="text-2xl font-bold text-deepgreen" id="total-juz">
-                  0
-                </div>
-                <div class="text-xs text-gray-500">Juz Dihafal</div>
-              </div>
-              <div>
-                <div class="text-2xl font-bold text-secondary" id="total-surah">
-                  0
-                </div>
-                <div class="text-xs text-gray-500">Surah Dihafal</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Left Column - Diary & Mood -->
-        <div class="lg:col-span-2 space-y-8">
-          <!-- Daily Diary Entry -->
-          <section class="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div
-              class="bg-gradient-to-r from-primary to-secondary p-4 text-white"
-            >
-              <h2 class="text-xl font-display font-bold flex items-center">
-                <i class="fas fa-book-open mr-2"></i> Catatan Harianku
-              </h2>
-            </div>
-            <div class="p-6">
-              <form id="daily-diary-form">
-                <div class="mb-6">
-                  <label class="block text-gray-700 mb-2 font-medium"
-                    >Bagaimana perasaanmu hari ini?</label
-                  >
-                  <div class="mood-selector flex justify-between max-w-md">
-                    <div
-                      class="mood-option text-center p-2 rounded-lg cursor-pointer"
-                    >
-                      <div class="text-2xl">😔</div>
-                      <div class="text-xs mt-1">Sedih</div>
+    <!-- Main App Pages -->
+    <div id="app-pages">
+        <!-- Home Page -->
+        <div id="home-page" class="page-section active">
+            <main class="container mx-auto px-4 py-8 flex-grow">
+                <!-- Welcome & Quick Stats -->
+                <section class="mb-8">
+                    <div class="bg-white rounded-2xl shadow-md p-6 journal-entry">
+                        <div class="flex flex-col md:flex-row justify-between items-center">
+                            <div class="mb-4 md:mb-0">
+                                <h2 class="text-xl font-display font-bold text-dark">Assalamu'alaikum, <span
+                                        id="welcome-name" class="text-secondary">User</span>!</h2>
+                                <p class="text-gray-600">Selamat datang di jurnal hafalan Qur'an-mu</p>
+                            </div>
+                            <div class="flex space-x-6 text-center">
+                                <div>
+                                    <div class="text-2xl font-bold text-primary" id="streak-count">0</div>
+                                    <div class="text-xs text-gray-500">Hari Beruntun</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-deepgreen" id="total-juz">0</div>
+                                    <div class="text-xs text-gray-500">Juz Dihafal</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-secondary" id="total-surah">0</div>
+                                    <div class="text-xs text-gray-500">Surah Dihafal</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div
-                      class="mood-option text-center p-2 rounded-lg cursor-pointer"
-                    >
-                      <div class="text-2xl">😐</div>
-                      <div class="text-xs mt-1">Biasa</div>
+                </section>
+
+                <!-- Quick Actions -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                        data-page="diary">
+                        <div class="text-primary text-3xl mb-3">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">Tambah Hafalan</h3>
+                        <p class="text-sm text-gray-600 mt-2">Catat hafalan baru hari ini</p>
                     </div>
-                    <div
-                      class="mood-option text-center p-2 rounded-lg cursor-pointer active"
-                    >
-                      <div class="text-2xl">😊</div>
-                      <div class="text-xs mt-1">Baik</div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                        data-page="progress">
+                        <div class="text-primary text-3xl mb-3">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">Lihat Progress</h3>
+                        <p class="text-sm text-gray-600 mt-2">Pantau perkembangan hafalan</p>
                     </div>
-                    <div
-                      class="mood-option text-center p-2 rounded-lg cursor-pointer"
-                    >
-                      <div class="text-2xl">😄</div>
-                      <div class="text-xs mt-1">Sangat Baik</div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                        <div class="text-primary text-3xl mb-3">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">Riwayat</h3>
+                        <p class="text-sm text-gray-600 mt-2">Lihat catatan sebelumnya</p>
                     </div>
-                    <div
-                      class="mood-option text-center p-2 rounded-lg cursor-pointer"
-                    >
-                      <div class="text-2xl">🤩</div>
-                      <div class="text-xs mt-1">Luar Biasa</div>
-                    </div>
-                  </div>
+
+                <!-- Ganti card Pencapaian di quick actions -->
+<div class="bg-white rounded-xl shadow-md p-6 text-center cursor-pointer hover:shadow-lg transition-shadow duration-300"
+    onclick="window.location.href='pencapaian.html'">
+    <div class="text-primary text-3xl mb-3">
+        <i class="fas fa-trophy"></i>
+    </div>
+    <h3 class="text-lg font-semibold text-dark">Pencapaian</h3>
+    <p class="text-sm text-gray-600 mt-2">Lihat pencapaianmu</p>
+</div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label
-                      for="surah"
-                      class="block text-gray-700 mb-2 font-medium"
-                      >Surah</label
-                    >
-                    <select
-                      id="surah"
-                      class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300 bg-white"
-                    >
-                      <option value="">Pilih Surah</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      for="recitation-type"
-                      class="block text-gray-700 mb-2 font-medium"
-                      >Jenis Aktivitas</label
-                    >
-                    <select
-                      id="recitation-type"
-                      class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300 bg-white"
-                    >
-                      <option value="hafalan">Hafalan Baru</option>
-                      <option value="murajaah">Murajaah (Pengulangan)</option>
-                      <option value="tahfiz">Setoran Hafalan</option>
-                      <option value="tadabbur">Tadabbur Ayat</option>
-                    </select>
-                  </div>
-                </div>
+                <!-- Recent Activity & Ayat Inspirasi -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Recent Activity -->
+                    <section class="bg-white rounded-xl shadow-lg">
+                        <div class="bg-primary p-4 text-white rounded-t-xl">
+                            <h2 class="text-xl font-display font-bold flex items-center">
+                                <i class="fas fa-history mr-2"></i> Aktivitas Terbaru
+                            </h2>
+                        </div>
+                        <div class="p-6">
+                            <div id="recent-entries" class="space-y-4">
+                                <div class="text-center py-8 text-gray-500">
+                                    <i class="fas fa-journal-whills text-4xl mb-3"></i>
+                                    <p>Belum ada aktivitas. Mulai hafalan pertama Anda!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label
-                      for="start-ayat"
-                      class="block text-gray-700 mb-2 font-medium"
-                      >Ayat Mulai</label
-                    >
-                    <input
-                      type="number"
-                      id="start-ayat"
-                      class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300"
-                      placeholder="1"
-                      min="1"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="end-ayat"
-                      class="block text-gray-700 mb-2 font-medium"
-                      >Ayat Selesai</label
-                    >
-                    <input
-                      type="number"
-                      id="end-ayat"
-                      class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300"
-                      placeholder="5"
-                      min="1"
-                    />
-                  </div>
+                    <!-- Ayat Inspirasi -->
+                    <section class="bg-gradient-to-br from-primary to-secondary rounded-xl shadow-lg text-white">
+                        <div class="p-6">
+                            <h2 class="text-xl font-display font-bold flex items-center mb-4">
+                                <i class="fas fa-star mr-2"></i> Ayat Inspirasi Hari Ini
+                            </h2>
+                            <div id="random-verse" class="text-center">
+                                <div class="arabic-text mb-4 text-white/90" id="arabic-verse">
+                                    يَـٰٓأَيُّهَا ٱلنَّاسُ قَدْ جَآءَتْكُم مَّوْعِظَةٌ مِّن رَّبِّكُمْ وَشِفَآءٌ
+                                    لِّمَا فِى ٱلصُّدُورِ وَهُدًى وَرَحْمَةٌ لِّلْمُؤْمِنِينَ
+                                </div>
+                                <div class="text-light mb-4 italic text-sm" id="verse-translation">
+                                    "Wahai manusia! Sungguh, telah datang kepadamu pelajaran (Al-Qur'an) dari Tuhanmu,
+                                    penyembuh bagi penyakit yang ada dalam dada dan petunjuk serta rahmat bagi orang
+                                    yang beriman."
+                                </div>
+                                <div class="font-medium" id="verse-reference">
+                                    (Yunus: 57)
+                                </div>
+                                <button id="new-verse-btn"
+                                    class="mt-4 bg-white text-primary hover:bg-light font-medium py-2 px-4 rounded-lg transition duration-300 floating-btn">
+                                    <i class="fas fa-random mr-2"></i> Ayat Lainnya
+                                </button>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="mb-4">
-                  <label
-                    for="diary-notes"
-                    class="block text-gray-700 mb-2 font-medium"
-                    >Catatan Pribadi</label
-                  >
-                  <textarea
-                    id="diary-notes"
-                    rows="4"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300"
-                    placeholder="Bagaimana pengalaman menghafal hari ini? Apa hikmah atau pelajaran yang kamu dapatkan?"
-                  ></textarea>
-                </div>
-
-                <div class="flex justify-between">
-                  <button
-                    type="button"
-                    id="add-voice-note"
-                    class="bg-light text-primary hover:bg-accent/20 font-medium py-2 px-4 rounded-lg transition duration-300 flex items-center"
-                  >
-                    <i class="fas fa-microphone mr-2"></i> Rekam Suara
-                  </button>
-                  <button
-                    type="submit"
-                    class="bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white font-medium py-3 px-6 rounded-lg transition duration-300 flex items-center shadow-md floating-btn"
-                  >
-                    <i class="fas fa-bookmark mr-2"></i> Simpan di Diary
-                  </button>
-                </div>
-              </form>
-            </div>
-          </section>
-
-          <!-- Recent Diary Entries -->
-          <section class="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div class="bg-gradient-to-r from-sage to-deepgreen p-4 text-white">
-              <h2 class="text-xl font-display font-bold flex items-center">
-                <i class="fas fa-history mr-2"></i> Entri Terbaru
-              </h2>
-            </div>
-            <div class="p-6">
-              <div id="recent-entries" class="space-y-4">
-                <div class="text-center py-8 text-gray-500">
-                  <i class="fas fa-journal-whills text-4xl mb-3"></i>
-                  <p>Belum ada entri diary. Mulai menulis hari ini!</p>
-                </div>
-              </div>
-            </div>
-          </section>
+            </main>
         </div>
 
-        <!-- Right Column - Progress & Inspiration -->
-        <div class="space-y-8">
-          <!-- Progress Overview -->
-          <section class="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div class="bg-gradient-to-r from-gold to-secondary p-4 text-white">
-              <h2 class="text-xl font-display font-bold flex items-center">
-                <i class="fas fa-chart-pie mr-2"></i> Progressku
-              </h2>
-            </div>
-            <div class="p-6">
-              <div class="mb-6">
-                <div class="flex justify-between mb-2">
-                  <span class="text-gray-700 font-medium">Target Harian</span>
-                  <span class="text-gray-700 font-medium" id="daily-percent"
-                    >0%</span
-                  >
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-3">
-                  <div
-                    id="daily-progress"
-                    class="bg-gradient-to-r from-accent to-primary h-3 rounded-full transition-all duration-500"
-                    style="width: 0%"
-                  ></div>
-                </div>
-                <div class="flex justify-between mt-1">
-                  <span class="text-sm text-gray-500" id="daily-current"
-                    >0 ayat</span
-                  >
-                  <span class="text-sm text-gray-500" id="daily-target"
-                    >5 ayat</span
-                  >
-                </div>
-              </div>
+        <!-- Diary Page -->
+        <div id="diary-page" class="page-section">
+            <main class="container mx-auto px-4 py-8 flex-grow">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Diary Form -->
+                    <div class="lg:col-span-2">
+                        <section class="bg-white rounded-xl shadow-lg overflow-hidden">
+                            <div class="bg-primary p-4 text-white">
+                                <h2 class="text-xl font-display font-bold flex items-center">
+                                    <i class="fas fa-book-open mr-2"></i> Catatan Harianku
+                                </h2>
+                            </div>
+                            <div class="p-6">
+                                <form id="daily-diary-form">
+                                    <div class="mb-6">
+                                        <label class="block text-dark mb-2 font-medium">Bagaimana perasaanmu hari
+                                            ini?</label>
+                                        <div class="mood-selector flex justify-between max-w-md">
+                                            <div class="mood-option text-center p-2 rounded-lg cursor-pointer">
+                                                <div class="text-2xl">😔</div>
+                                                <div class="text-xs mt-1">Sedih</div>
+                                            </div>
+                                            <div class="mood-option text-center p-2 rounded-lg cursor-pointer">
+                                                <div class="text-2xl">😐</div>
+                                                <div class="text-xs mt-1">Biasa</div>
+                                            </div>
+                                            <div class="mood-option text-center p-2 rounded-lg cursor-pointer active">
+                                                <div class="text-2xl">😊</div>
+                                                <div class="text-xs mt-1">Baik</div>
+                                            </div>
+                                            <div class="mood-option text-center p-2 rounded-lg cursor-pointer">
+                                                <div class="text-2xl">😄</div>
+                                                <div class="text-xs mt-1">Sangat Baik</div>
+                                            </div>
+                                            <div class="mood-option text-center p-2 rounded-lg cursor-pointer">
+                                                <div class="text-2xl">🤩</div>
+                                                <div class="text-xs mt-1">Luar Biasa</div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-              <div class="mb-6">
-                <div class="flex justify-between mb-2">
-                  <span class="text-gray-700 font-medium"
-                    >Pencapaian Bulan Ini</span
-                  >
-                  <span class="text-gray-700 font-medium" id="monthly-percent"
-                    >0%</span
-                  >
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-3">
-                  <div
-                    id="monthly-progress"
-                    class="bg-gradient-to-r from-sage to-deepgreen h-3 rounded-full transition-all duration-500"
-                    style="width: 0%"
-                  ></div>
-                </div>
-                <div class="flex justify-between mt-1">
-                  <span class="text-sm text-gray-500" id="monthly-current"
-                    >0 ayat</span
-                  >
-                  <span class="text-sm text-gray-500" id="monthly-target"
-                    >50 ayat</span
-                  >
-                </div>
-              </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <label for="surah" class="block text-dark mb-2 font-medium">Surah</label>
+                                            <select id="surah"
+                                                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300 bg-white">
+                                                <option value="">Pilih Surah</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="recitation-type" class="block text-dark mb-2 font-medium">Jenis
+                                                Aktivitas</label>
+                                            <select id="recitation-type"
+                                                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300 bg-white">
+                                                <option value="hafalan">Hafalan Baru</option>
+                                                <option value="murajaah">Murajaah (Pengulangan)</option>
+                                                <option value="tahfiz">Setoran Hafalan</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
-              <div class="flex justify-center mt-4">
-                <div class="relative w-40 h-40">
-                  <svg class="w-full h-full" viewBox="0 0 36 36">
-                    <path
-                      class="stroke-gray-200 fill-none stroke-2"
-                      d="M18 2.0845
-                                        a 15.9155 15.9155 0 0 1 0 31.831
-                                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                    <path
-                      id="total-progress-circle"
-                      class="stroke-primary fill-none stroke-2 transition-all duration-1000"
-                      stroke-dasharray="100, 100"
-                      d="M18 2.0845
-                                        a 15.9155 15.9155 0 0 1 0 31.831
-                                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                    <text
-                      x="18"
-                      y="20.5"
-                      class="text-4 font-bold fill-primary text-center"
-                      text-anchor="middle"
-                      dominant-baseline="central"
-                    >
-                      0%
-                    </text>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </section>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <label for="start-ayat" class="block text-dark mb-2 font-medium">Ayat
+                                                Mulai</label>
+                                            <input type="number" id="start-ayat"
+                                                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300"
+                                                placeholder="1" min="1">
+                                        </div>
+                                        <div>
+                                            <label for="end-ayat" class="block text-dark mb-2 font-medium">Ayat
+                                                Selesai</label>
+                                            <input type="number" id="end-ayat"
+                                                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300"
+                                                placeholder="5" min="1">
+                                        </div>
+                                    </div>
 
-          <!-- Ayat Inspirasi -->
-          <section
-            class="bg-gradient-to-br from-primary to-secondary rounded-2xl shadow-lg text-white overflow-hidden relative"
-          >
-            <div
-              class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mt-8 -mr-8"
-            ></div>
-            <div
-              class="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full -mb-6 -ml-6"
-            ></div>
+                                    <div class="mb-4">
+                                        <label for="diary-notes" class="block text-dark mb-2 font-medium">Catatan
+                                            Pribadi</label>
+                                        <textarea id="diary-notes" rows="4"
+                                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition duration-300"
+                                            placeholder="Bagaimana pengalaman menghafal hari ini? Apa hikmah atau pelajaran yang kamu dapatkan?"></textarea>
+                                    </div>
 
-            <div class="p-6 relative z-10">
-              <h2 class="text-xl font-display font-bold flex items-center mb-4">
-                <i class="fas fa-star mr-2"></i> Ayat Inspirasi
-              </h2>
-              <div id="random-verse" class="text-center">
-                <div class="arabic-text mb-4 text-white/90" id="arabic-verse">
-                  يَـٰٓأَيُّهَا ٱلنَّاسُ قَدْ جَآءَتْكُم مَّوْعِظَةٌ مِّن
-                  رَّبِّكُمْ وَشِفَآءٌ لِّمَا فِى ٱلصُّدُورِ وَهُدًى وَرَحْمَةٌ
-                  لِّلْمُؤْمِنِينَ
-                </div>
-                <div
-                  class="text-light mb-4 italic text-sm"
-                  id="verse-translation"
-                >
-                  "Wahai manusia! Sungguh, telah datang kepadamu pelajaran
-                  (Al-Qur'an) dari Tuhanmu, penyembuh bagi penyakit yang ada
-                  dalam dada dan petunjuk serta rahmat bagi orang yang beriman."
-                </div>
-                <div class="font-medium" id="verse-reference">(Yunus: 57)</div>
-                <button
-                  id="new-verse-btn"
-                  class="mt-4 bg-white text-primary hover:bg-light font-medium py-2 px-4 rounded-lg transition duration-300 floating-btn"
-                >
-                  <i class="fas fa-random mr-2"></i> Ayat Lainnya
-                </button>
-              </div>
-            </div>
-          </section>
+                                    <div class="flex flex-col sm:flex-row justify-between gap-4">
+                                        <button type="button" id="add-voice-note"
+                                            class="bg-light text-primary hover:bg-primary/20 font-medium py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center order-2 sm:order-1">
+                                            <i class="fas fa-microphone mr-2"></i> Rekam Suara
+                                        </button>
+                                        <button type="submit"
+                                            class="bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white font-medium py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center shadow-md floating-btn order-1 sm:order-2">
+                                            <i class="fas fa-bookmark mr-2"></i> Simpan di Diary
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
 
-          <!-- Sticker Collection -->
-          <section class="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div class="bg-gradient-to-r from-accent to-gold p-4 text-white">
-              <h2 class="text-xl font-display font-bold flex items-center">
-                <i class="fas fa-sticky-note mr-2"></i> Koleksi Stiker
-              </h2>
-            </div>
-            <div class="p-6">
-              <div class="grid grid-cols-4 gap-4">
-                <div
-                  class="sticker w-16 h-16 flex items-center justify-center text-2xl"
-                >
-                  🌟
+                    <!-- Progress & Stickers -->
+                    <div class="space-y-6">
+                        <!-- Progress Overview -->
+                        <section class="bg-white rounded-xl shadow-lg overflow-hidden">
+                            <div class="bg-primary p-4 text-white">
+                                <h2 class="text-xl font-display font-bold flex items-center">
+                                    <i class="fas fa-chart-pie mr-2"></i> Progress Hari Ini
+                                </h2>
+                            </div>
+                            <div class="p-6">
+                                <div class="mb-6">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-dark font-medium">Target Harian</span>
+                                        <span class="text-dark font-medium" id="daily-percent">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div id="daily-progress"
+                                            class="bg-gradient-to-r from-accent to-primary h-3 rounded-full transition-all duration-500"
+                                            style="width: 0%"></div>
+                                    </div>
+                                    <div class="flex justify-between mt-1">
+                                        <span class="text-sm text-gray-500" id="daily-current">0 ayat</span>
+                                        <span class="text-sm text-gray-500" id="daily-target">5 ayat</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-center mt-4">
+                                    <div class="relative w-32 h-32">
+                                        <svg class="w-full h-full" viewBox="0 0 36 36">
+                                            <path class="stroke-gray-200 fill-none stroke-2" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <path id="total-progress-circle"
+                                                class="stroke-primary fill-none stroke-2 transition-all duration-1000"
+                                                stroke-dasharray="100, 100" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <text x="18" y="20.5" class="text-4 font-bold fill-primary text-center"
+                                                text-anchor="middle" dominant-baseline="central">0%</text>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Sticker Collection -->
+                        <section class="bg-white rounded-xl shadow-lg overflow-hidden">
+                            <div class="bg-primary p-4 text-white">
+                                <h2 class="text-xl font-display font-bold flex items-center">
+                                    <i class="fas fa-sticky-note mr-2"></i> Stiker
+                                </h2>
+                            </div>
+                            <div class="p-6">
+                                <div class="grid grid-cols-4 gap-4">
+                                    <div
+                                        class="sticker w-12 h-12 flex items-center justify-center text-xl cursor-pointer hover:scale-110 transition-transform">
+                                        🌟
+                                    </div>
+                                    <div
+                                        class="sticker w-12 h-12 flex items-center justify-center text-xl cursor-pointer hover:scale-110 transition-transform">
+                                        📖
+                                    </div>
+                                    <div
+                                        class="sticker w-12 h-12 flex items-center justify-center text-xl cursor-pointer hover:scale-110 transition-transform">
+                                        🎯
+                                    </div>
+                                    <div
+                                        class="sticker w-12 h-12 flex items-center justify-center text-xl cursor-pointer hover:scale-110 transition-transform">
+                                        💫
+                                    </div>
+                                    <div
+                                        class="sticker w-12 h-12 flex items-center justify-center text-xl cursor-pointer hover:scale-110 transition-transform">
+                                        🏆
+                                    </div>
+                                    <div
+                                        class="sticker w-12 h-12 flex items-center justify-center text-xl cursor-pointer hover:scale-110 transition-transform">
+                                        ✨
+                                    </div>
+                                    <div
+                                        class="sticker w-12 h-12 flex items-center justify-center text-xl cursor-pointer hover:scale-110 transition-transform">
+                                        🌙
+                                    </div>
+                                    <div
+                                        class="sticker w-12 h-12 flex items-center justify-center text-xl cursor-pointer hover:scale-110 transition-transform">
+                                        ❤️
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-                <div
-                  class="sticker w-16 h-16 flex items-center justify-center text-2xl"
-                >
-                  📖
-                </div>
-                <div
-                  class="sticker w-16 h-16 flex items-center justify-center text-2xl"
-                >
-                  🎯
-                </div>
-                <div
-                  class="sticker w-16 h-16 flex items-center justify-center text-2xl"
-                >
-                  💫
-                </div>
-                <div
-                  class="sticker w-16 h-16 flex items-center justify-center text-2xl"
-                >
-                  🏆
-                </div>
-                <div
-                  class="sticker w-16 h-16 flex items-center justify-center text-2xl"
-                >
-                  ✨
-                </div>
-                <div
-                  class="sticker w-16 h-16 flex items-center justify-center text-2xl"
-                >
-                  🌙
-                </div>
-                <div
-                  class="sticker w-16 h-16 flex items-center justify-center text-2xl"
-                >
-                  ❤️
-                </div>
-              </div>
-              <p class="text-center text-gray-500 text-sm mt-4">
-                Klik stiker untuk menambahkannya ke entri diary
-              </p>
-            </div>
-          </section>
+            </main>
         </div>
-      </div>
-    </main>
 
-    <!-- Floating Action Button -->
-    <div class="fixed bottom-6 right-6">
-      <button
-        id="quick-add-btn"
-        class="floating-btn bg-gradient-to-r from-primary to-secondary text-white w-14 h-14 rounded-full flex items-center justify-center text-xl shadow-lg"
-      >
-        <i class="fas fa-plus"></i>
-      </button>
+        <!-- Progress Page -->
+        <div id="progress-page" class="page-section">
+            <main class="container mx-auto px-4 py-8 flex-grow">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Progress Stats -->
+                    <div class="space-y-6">
+                        <section class="bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-xl font-display font-bold text-dark mb-6">Statistik Hafalan</h2>
+
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-dark font-medium">Target Mingguan</span>
+                                        <span class="text-dark font-medium" id="weekly-percent">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-4">
+                                        <div id="weekly-progress"
+                                            class="bg-gradient-to-r from-accent to-primary h-4 rounded-full transition-all duration-500"
+                                            style="width: 0%"></div>
+                                    </div>
+                                    <div class="flex justify-between mt-1">
+                                        <span class="text-sm text-gray-500" id="weekly-current">0 ayat</span>
+                                        <span class="text-sm text-gray-500" id="weekly-target">20 ayat</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-dark font-medium">Target Bulanan</span>
+                                        <span class="text-dark font-medium" id="monthly-percent">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-4">
+                                        <div id="monthly-progress"
+                                            class="bg-gradient-to-r from-sage to-deepgreen h-4 rounded-full transition-all duration-500"
+                                            style="width: 0%"></div>
+                                    </div>
+                                    <div class="flex justify-between mt-1">
+                                        <span class="text-sm text-gray-500" id="monthly-current">0 ayat</span>
+                                        <span class="text-sm text-gray-500" id="monthly-target">80 ayat</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Achievements -->
+                        <section class="bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-xl font-display font-bold text-dark mb-6">Pencapaian</h2>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="text-center p-4 bg-light rounded-lg">
+                                    <div class="text-2xl text-primary mb-2">
+                                        <i class="fas fa-calendar-check"></i>
+                                    </div>
+                                    <div class="font-semibold text-dark">Konsisten 7 Hari</div>
+                                </div>
+                                <div class="text-center p-4 bg-light rounded-lg">
+                                    <div class="text-2xl text-primary mb-2">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="font-semibold text-dark">1 Juz Hafalan</div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Activity History -->
+                    <section class="bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-xl font-display font-bold text-dark mb-6">Riwayat Aktivitas</h2>
+                        <div id="activity-history" class="space-y-4 max-h-96 overflow-y-auto">
+                            <div class="text-center py-8 text-gray-500">
+                                <i class="fas fa-history text-4xl mb-3"></i>
+                                <p>Belum ada riwayat aktivitas</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
     </div>
 
     <!-- Footer -->
-    <footer
-      class="bg-gradient-to-r from-primary to-secondary text-white py-6 mt-12 bg-islamic-pattern"
-    >
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <div class="mb-4 md:mb-0 text-center md:text-left">
-            <p class="text-light font-medium">My Qur'an Diary</p>
-            <p class="text-light text-sm mt-1">
-              Jadikan setiap hari bermakna dengan menghafal Al-Qur'an
-            </p>
-          </div>
-          <div class="flex space-x-4">
-            <a
-              href="#"
-              class="text-light hover:text-white transition duration-300 bg-white/10 p-2 rounded-full"
-            >
-              <i class="fas fa-share-alt"></i>
-            </a>
-            <a
-              href="#"
-              class="text-light hover:text-white transition duration-300 bg-white/10 p-2 rounded-full"
-            >
-              <i class="fas fa-cog"></i>
-            </a>
-            <a
-              href="#"
-              class="text-light hover:text-white transition duration-300 bg-white/10 p-2 rounded-full"
-            >
-              <i class="fas fa-question-circle"></i>
-            </a>
-          </div>
+    <footer class="bg-primary text-dark py-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0 text-center md:text-left">
+                    <p class="font-medium">My Qur'an Diary</p>
+                    <p class="text-dark/70 text-sm mt-1">Jadikan setiap hari bermakna dengan menghafal Al-Qur'an</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-dark/70 hover:text-dark transition duration-300">
+                        <i class="fas fa-share-alt"></i>
+                    </a>
+                    <a href="#" class="text-dark/70 hover:text-dark transition duration-300">
+                        <i class="fas fa-question-circle"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
     </footer>
 
     <script>
-      // Data storage
-      let diaryEntries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
-      let targets = JSON.parse(localStorage.getItem("targets")) || {
-        daily: { target: 5, current: 0 },
-        monthly: { target: 50, current: 0 },
-      };
-      let surahList = [];
-      let streak = JSON.parse(localStorage.getItem("streak")) || 0;
+        // Data storage
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-      // DOM Elements
-      const surahSelect = document.getElementById("surah");
-      const diaryForm = document.getElementById("daily-diary-form");
-      const recentEntries = document.getElementById("recent-entries");
-      const newVerseBtn = document.getElementById("new-verse-btn");
-      const arabicVerse = document.getElementById("arabic-verse");
-      const verseTranslation = document.getElementById("verse-translation");
-      const verseReference = document.getElementById("verse-reference");
-      const quickAddBtn = document.getElementById("quick-add-btn");
-      const moodOptions = document.querySelectorAll(".mood-option");
-      const addVoiceNoteBtn = document.getElementById("add-voice-note");
-
-      // Initialize the app
-      document.addEventListener("DOMContentLoaded", function () {
-        // Set current date
-        const now = new Date();
-        document.getElementById("current-date").textContent =
-          now.toLocaleDateString("id-ID", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          });
-
-        // Set Hijri date (placeholder)
-        document.getElementById("hijri-date").textContent = "1445 H";
-
-        // Load surah list
-        loadSurahList();
-
-        // Load diary entries and update UI
-        updateStats();
-        updateRecentEntries();
-        updateProgressBars();
-
-        // Load a random verse
-        loadRandomVerse();
-
-        // Set up mood selector
-        setupMoodSelector();
-
-        // Check and update streak
-        updateStreak();
-      });
-
-      // Load surah list from API
-      async function loadSurahList() {
-        try {
-          const response = await fetch("https://api.alquran.cloud/v1/surah");
-          const data = await response.json();
-          surahList = data.data;
-
-          // Populate surah dropdown
-          surahList.forEach((surah) => {
-            const option = document.createElement("option");
-            option.value = surah.number;
-            option.textContent = `${surah.number}. ${surah.englishName} (${surah.name})`;
-            surahSelect.appendChild(option);
-          });
-        } catch (error) {
-          console.error("Error loading surah list:", error);
-          // Fallback to a static list if API fails
-          const fallbackSurahs = [
-            { number: 1, englishName: "Al-Fatihah", name: "الفاتحة" },
-            { number: 2, englishName: "Al-Baqarah", name: "البقرة" },
-            { number: 36, englishName: "Ya-Sin", name: "يس" },
-            { number: 55, englishName: "Ar-Rahman", name: "الرحمن" },
-            { number: 67, englishName: "Al-Mulk", name: "الملك" },
-            { number: 112, englishName: "Al-Ikhlas", name: "الإخلاص" },
-          ];
-
-          fallbackSurahs.forEach((surah) => {
-            const option = document.createElement("option");
-            option.value = surah.number;
-            option.textContent = `${surah.number}. ${surah.englishName} (${surah.name})`;
-            surahSelect.appendChild(option);
-          });
-        }
-      }
-
-      // Load a random verse from API
-      async function loadRandomVerse() {
-        try {
-          // Get a random surah (1-114)
-          const randomSurah = Math.floor(Math.random() * 114) + 1;
-
-          // Get surah info to know how many verses it has
-          const surahInfoResponse = await fetch(
-            `https://api.alquran.cloud/v1/surah/${randomSurah}`
-          );
-          const surahInfo = await surahInfoResponse.json();
-          const verseCount = surahInfo.data.numberOfAyahs;
-
-          // Get a random verse from that surah
-          const randomVerse = Math.floor(Math.random() * verseCount) + 1;
-
-          // Fetch the verse
-          const response = await fetch(
-            `https://api.alquran.cloud/v1/ayah/${randomSurah}:${randomVerse}/editions/quran-uthmani,id.indonesian`
-          );
-          const data = await response.json();
-
-          if (data.code === 200 && data.data.length >= 2) {
-            arabicVerse.textContent = data.data[0].text;
-            verseTranslation.textContent = `"${data.data[1].text}"`;
-            verseReference.textContent = `(${surahInfo.data.englishName} ${randomSurah}:${randomVerse})`;
-          }
-        } catch (error) {
-          console.error("Error loading random verse:", error);
-          // Fallback verse if API fails
-          arabicVerse.textContent =
-            "يَـٰٓأَيُّهَا ٱلنَّاسُ قَدْ جَآءَتْكُم مَّوْعِظَةٌ مِّن رَّبِّكُمْ وَشِفَآءٌ لِّمَا فِى ٱلصُّدُورِ وَهُدًى وَرَحْمَةٌ لِّلْمُؤْمِنِينَ";
-          verseTranslation.textContent =
-            '"Wahai manusia! Sungguh, telah datang kepadamu pelajaran (Al-Qur\'an) dari Tuhanmu, penyembuh bagi penyakit yang ada dalam dada dan petunjuk serta rahmat bagi orang yang beriman."';
-          verseReference.textContent = "(Yunus: 57)";
-        }
-      }
-
-      // Set up mood selector
-      function setupMoodSelector() {
-        moodOptions.forEach((option) => {
-          option.addEventListener("click", function () {
-            moodOptions.forEach((opt) => opt.classList.remove("active"));
-            this.classList.add("active");
-          });
+        // Check login status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            updateUserDisplay();
+            initializeApp();
+            setupNavigation();
         });
-      }
 
-      // Handle diary form submission
-      diaryForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const surahNumber = parseInt(surahSelect.value);
-        const startAyat = parseInt(document.getElementById("start-ayat").value);
-        const endAyat = parseInt(document.getElementById("end-ayat").value);
-        const type = document.getElementById("recitation-type").value;
-        const notes = document.getElementById("diary-notes").value;
-        const selectedMood = document
-          .querySelector(".mood-option.active")
-          .querySelector(".text-2xl").textContent;
-
-        if (!surahNumber || !startAyat || !endAyat) {
-          alert("Harap isi semua field yang diperlukan!");
-          return;
+        // Update user display
+        function updateUserDisplay() {
+            if (currentUser) {
+                const userInitial = document.getElementById('user-initial');
+                const usernameDisplay = document.getElementById('username-display');
+                const welcomeName = document.getElementById('welcome-name');
+                
+                if (userInitial) userInitial.textContent = currentUser.name.charAt(0).toUpperCase();
+                if (usernameDisplay) usernameDisplay.textContent = currentUser.name;
+                if (welcomeName) welcomeName.textContent = currentUser.name;
+            }
         }
 
-        if (endAyat < startAyat) {
-          alert("Ayat selesai harus lebih besar atau sama dengan ayat mulai!");
-          return;
-        }
+        // Handle logout
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            showNotification('Berhasil logout', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        });
 
-        const selectedSurah = surahList.find((s) => s.number === surahNumber);
-        const ayatCount = endAyat - startAyat + 1;
-
-        // Create diary entry
-        const entry = {
-          id: Date.now(),
-          date: new Date().toISOString(),
-          surah: selectedSurah
-            ? selectedSurah.englishName
-            : `Surah ${surahNumber}`,
-          surahNumber: surahNumber,
-          startAyat: startAyat,
-          endAyat: endAyat,
-          ayatCount: ayatCount,
-          type: type,
-          mood: selectedMood,
-          notes: notes,
-          sticker: null,
-        };
-
-        // Add to diary entries
-        diaryEntries.unshift(entry);
-        localStorage.setItem("diaryEntries", JSON.stringify(diaryEntries));
-
-        // Update targets
-        targets.daily.current += ayatCount;
-        targets.monthly.current += ayatCount;
-        localStorage.setItem("targets", JSON.stringify(targets));
-
-        // Update streak
-        updateStreak(true);
-
-        // Update UI
-        updateStats();
-        updateRecentEntries();
-        updateProgressBars();
-
-        // Reset form
-        diaryForm.reset();
-
-        // Reset mood to default
-        moodOptions.forEach((opt) => opt.classList.remove("active"));
-        moodOptions[2].classList.add("active");
-
-        // Show success message
-        showNotification(`Entri diary berhasil disimpan!`, "success");
-      });
-
-      // Update streak
-      function updateStreak(newEntry = false) {
-        const today = new Date().toDateString();
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        const yesterdayStr = yesterday.toDateString();
-
-        const hasEntryToday = diaryEntries.some(
-          (entry) => new Date(entry.date).toDateString() === today
-        );
-
-        const hasEntryYesterday = diaryEntries.some(
-          (entry) => new Date(entry.date).toDateString() === yesterdayStr
-        );
-
-        if (newEntry && hasEntryToday) {
-          // If user added an entry today and had one yesterday, increment streak
-          if (hasEntryYesterday || streak === 0) {
-            streak++;
-          }
-        } else if (!hasEntryToday && !hasEntryYesterday) {
-          // If no entries for today or yesterday, reset streak
-          streak = 0;
-        }
-
-        localStorage.setItem("streak", JSON.stringify(streak));
-        document.getElementById("streak-count").textContent = streak;
-      }
-
-      // Update statistics
-      function updateStats() {
-        // Calculate total juz (approximate)
-        const totalAyat = diaryEntries.reduce(
-          (sum, entry) => sum + entry.ayatCount,
-          0
-        );
-        const totalJuz = Math.floor(totalAyat / 200); // Approximation
-        document.getElementById("total-juz").textContent = totalJuz;
-
-        // Calculate unique surahs
-        const uniqueSurahs = new Set(
-          diaryEntries.map((entry) => entry.surahNumber)
-        );
-        document.getElementById("total-surah").textContent = uniqueSurahs.size;
-      }
-
-      // Update recent entries
-      function updateRecentEntries() {
-        if (diaryEntries.length === 0) {
-          recentEntries.innerHTML = `
-                    <div class="text-center py-8 text-gray-500">
-                        <i class="fas fa-journal-whills text-4xl mb-3"></i>
-                        <p>Belum ada entri diary. Mulai menulis hari ini!</p>
-                    </div>
-                `;
-          return;
-        }
-
-        const recentItems = diaryEntries
-          .slice(0, 3)
-          .map((entry) => {
-            const date = new Date(entry.date);
-            const dateStr = date.toLocaleDateString("id-ID", {
-              day: "numeric",
-              month: "short",
+        // Setup navigation
+        function setupNavigation() {
+            // Navigation handling
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    
+                    // Hide all pages
+                    document.querySelectorAll('.page-section').forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
+                    // Show target page
+                    document.getElementById(`${targetId}-page`).classList.add('active');
+                    
+                    // Update active nav item
+                    document.querySelectorAll('.nav-item').forEach(nav => {
+                        nav.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
             });
 
-            return `
-                    <div class="journal-entry p-4 rounded-lg fade-in">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h4 class="font-semibold text-primary">${
-                                  entry.surah
-                                } ${entry.startAyat}-${entry.endAyat}</h4>
-                                <p class="text-sm text-gray-600 capitalize">${
-                                  entry.type
-                                }</p>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-2">${entry.mood}</span>
-                                <span class="text-sm text-gray-500">${dateStr}</span>
-                            </div>
+            // Quick actions
+            document.querySelectorAll('[data-page]').forEach(action => {
+                action.addEventListener('click', function() {
+                    const page = this.getAttribute('data-page');
+                    const targetLink = document.querySelector(`a[href="#${page}"]`);
+                    if (targetLink) {
+                        targetLink.click();
+                    }
+                });
+            });
+        }
+
+        // Initialize app features
+        function initializeApp() {
+            loadSurahList();
+            updateStats();
+            updateRecentEntries();
+            updateProgressBars();
+            loadRandomVerse();
+            setupMoodSelector();
+            updateStreak();
+            
+            // Setup diary form
+            document.getElementById('daily-diary-form').addEventListener('submit', handleDiarySubmit);
+            document.getElementById('new-verse-btn').addEventListener('click', loadRandomVerse);
+            document.getElementById('add-voice-note').addEventListener('click', handleVoiceNote);
+        }
+
+        // Placeholder functions
+        function loadSurahList() {
+            console.log('Loading surah list...');
+            // Add some sample surahs
+            const surahSelect = document.getElementById('surah');
+            const sampleSurahs = [
+                'Al-Fatihah', 'Al-Baqarah', 'Ali Imran', 'An-Nisa', 'Al-Maidah',
+                'Al-An\'am', 'Al-A\'raf', 'Al-Anfal', 'At-Taubah', 'Yunus'
+            ];
+            
+            sampleSurahs.forEach((surah, index) => {
+                const option = document.createElement('option');
+                option.value = index + 1;
+                option.textContent = `${index + 1}. ${surah}`;
+                surahSelect.appendChild(option);
+            });
+        }
+
+        function loadRandomVerse() {
+            console.log('Loading random verse...');
+            // This would typically call an API
+            showNotification('Ayat inspirasi diperbarui!', 'success');
+        }
+
+        function setupMoodSelector() {
+            const moodOptions = document.querySelectorAll('.mood-option');
+            moodOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    moodOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        function handleDiarySubmit(e) {
+            e.preventDefault();
+            showNotification('Entri diary berhasil disimpan!', 'success');
+            // Reset form
+            document.getElementById('daily-diary-form').reset();
+            // Reset mood to default
+            document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelectorAll('.mood-option')[2].classList.add('active');
+        }
+
+        function handleVoiceNote() {
+            showNotification('Fitur rekam suara akan segera hadir!', 'info');
+        }
+
+        function updateStreak() {
+            // Simple streak calculation
+            const streak = Math.floor(Math.random() * 10);
+            document.getElementById('streak-count').textContent = streak;
+        }
+
+        function updateStats() {
+            // Sample data
+            document.getElementById('total-juz').textContent = '2';
+            document.getElementById('total-surah').textContent = '5';
+        }
+
+        function updateRecentEntries() {
+            // Sample recent entries
+            const recentEntries = document.getElementById('recent-entries');
+            recentEntries.innerHTML = `
+                <div class="journal-entry p-4 rounded-lg fade-in">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h4 class="font-semibold text-primary">Al-Fatihah 1-7</h4>
+                            <p class="text-sm text-gray-600 capitalize">hafalan baru</p>
                         </div>
-                        <p class="text-sm text-gray-700 mt-2">${
-                          entry.notes || "Tidak ada catatan tambahan"
-                        }</p>
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-2">😊</span>
+                            <span class="text-sm text-gray-500">Hari ini</span>
+                        </div>
                     </div>
-                `;
-          })
-          .join("");
-
-        recentEntries.innerHTML = recentItems;
-      }
-
-      // At the beginning of the script section in index.html
-      let currentUser = JSON.parse(localStorage.getItem("currentUser")) || {
-        name: "Hafiz/Hafizah",
-      };
-
-      // Update user display in header
-      function updateUserDisplay() {
-        const userDisplay = document.querySelector(".user-display");
-        if (userDisplay) {
-          const initials = currentUser.name.charAt(0).toUpperCase();
-          userDisplay.innerHTML = `
-            <div class="flex items-center space-x-2 bg-white/20 rounded-full pl-2 pr-4 py-1 backdrop-blur-sm">
-                <div class="bg-white rounded-full p-1">
-                    <span class="text-primary text-sm font-bold">${initials}</span>
+                    <p class="text-sm text-gray-700 mt-2">Mulai menghafal surah pembuka dengan penuh semangat!</p>
                 </div>
-                <span class="font-medium">${currentUser.name}</span>
-            </div>
-        `;
+            `;
         }
-      }
 
-      // Versi lebih sederhana
-      document.addEventListener("DOMContentLoaded", function () {
-        const userInitial = document.getElementById("user-initial");
-        const username = document.getElementById("username");
-
-        if (userInitial && username && currentUser) {
-          userInitial.textContent = currentUser.name.charAt(0).toUpperCase();
-          username.textContent = currentUser.name;
+        function updateProgressBars() {
+            // Sample progress data
+            document.getElementById('daily-progress').style.width = '60%';
+            document.getElementById('daily-percent').textContent = '60%';
+            document.getElementById('daily-current').textContent = '3 ayat';
+            
+            document.getElementById('weekly-progress').style.width = '45%';
+            document.getElementById('weekly-percent').textContent = '45%';
+            document.getElementById('weekly-current').textContent = '9 ayat';
+            
+            document.getElementById('monthly-progress').style.width = '25%';
+            document.getElementById('monthly-percent').textContent = '25%';
+            document.getElementById('monthly-current').textContent = '20 ayat';
         }
-      });
-      // Add logout functionality
-      function addLogoutButton() {
-        const header = document.querySelector("header");
-        const existingLogout = document.querySelector(".logout-btn");
 
-        if (!existingLogout) {
-          const logoutBtn = document.createElement("button");
-          logoutBtn.className =
-            "logout-btn bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-lg transition duration-300 text-sm";
-          logoutBtn.innerHTML =
-            '<i class="fas fa-sign-out-alt mr-1"></i> Keluar';
-          logoutBtn.addEventListener("click", function () {
-            localStorage.removeItem("currentUser");
-            window.location.href = "login.html";
-          });
-
-          const headerContainer = document.querySelector(
-            "header .container .flex"
-          );
-          headerContainer.appendChild(logoutBtn);
-        }
-      }
-
-      // Call these functions when the page loads in index.html
-      document.addEventListener("DOMContentLoaded", function () {
-        updateUserDisplay();
-        addLogoutButton();
-        // ... existing initialization code
-      });
-
-      // Update progress bars
-      function updateProgressBars() {
-        // Daily progress
-        const dailyPercent = Math.min(
-          100,
-          (targets.daily.current / targets.daily.target) * 100
-        );
-        document.getElementById(
-          "daily-progress"
-        ).style.width = `${dailyPercent}%`;
-        document.getElementById("daily-percent").textContent = `${Math.round(
-          dailyPercent
-        )}%`;
-        document.getElementById(
-          "daily-current"
-        ).textContent = `${targets.daily.current} ayat`;
-        document.getElementById(
-          "daily-target"
-        ).textContent = `${targets.daily.target} ayat`;
-
-        // Monthly progress
-        const monthlyPercent = Math.min(
-          100,
-          (targets.monthly.current / targets.monthly.target) * 100
-        );
-        document.getElementById(
-          "monthly-progress"
-        ).style.width = `${monthlyPercent}%`;
-        document.getElementById("monthly-percent").textContent = `${Math.round(
-          monthlyPercent
-        )}%`;
-        document.getElementById(
-          "monthly-current"
-        ).textContent = `${targets.monthly.current} ayat`;
-        document.getElementById(
-          "monthly-target"
-        ).textContent = `${targets.monthly.target} ayat`;
-
-        // Total progress (simulated)
-        const totalPercent = Math.min(
-          100,
-          (diaryEntries.reduce((sum, entry) => sum + entry.ayatCount, 0) /
-            6236) *
-            100
-        );
-        const circle = document.querySelector("#total-progress-circle");
-        const circumference = 2 * Math.PI * 15.9155;
-        const offset = circumference - (totalPercent / 100) * circumference;
-        circle.style.strokeDasharray = `${circumference} ${circumference}`;
-        circle.style.strokeDashoffset = offset;
-        document.querySelector(
-          "#total-progress-circle + text"
-        ).textContent = `${Math.round(totalPercent)}%`;
-      }
-
-      // Load new random verse
-      newVerseBtn.addEventListener("click", loadRandomVerse);
-
-      // Quick add button
-      quickAddBtn.addEventListener("click", function () {
-        document
-          .getElementById("daily-diary-form")
-          .scrollIntoView({ behavior: "smooth" });
-      });
-
-      // Voice note button (placeholder functionality)
-      addVoiceNoteBtn.addEventListener("click", function () {
-        showNotification("Fitur rekam suara akan segera hadir!", "info");
-      });
-
-      // Show notification
-      function showNotification(message, type) {
-        // Create notification element
-        const notification = document.createElement("div");
-        notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 fade-in ${
-          type === "success"
-            ? "bg-deepgreen text-white"
-            : type === "info"
-            ? "bg-accent text-white"
-            : "bg-secondary text-white"
-        }`;
-        notification.innerHTML = `
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 fade-in ${
+                type === 'success' ? 'bg-deepgreen text-white' : 
+                type === 'error' ? 'bg-secondary text-white' : 'bg-primary text-white'
+            }`;
+            notification.innerHTML = `
                 <div class="flex items-center">
-                    <i class="fas ${
-                      type === "success" ? "fa-check-circle" : "fa-info-circle"
-                    } mr-2"></i>
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'} mr-2"></i>
                     <span>${message}</span>
                 </div>
             `;
 
-        // Add to DOM
-        document.body.appendChild(notification);
+            document.body.appendChild(notification);
 
-        // Remove after 3 seconds
-        setTimeout(() => {
-          notification.classList.remove("fade-in");
-          notification.classList.add("fade-out");
-          setTimeout(() => {
-            document.body.removeChild(notification);
-          }, 500);
-        }, 3000);
-      }
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
     </script>
-  </body>
+</body>
 </html>

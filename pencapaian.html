@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencapaian - My Qur'an Diary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C1C4A4',
+                        secondary: '#A8B38C',
+                        accent: '#8A9B6E',
+                        light: '#F0F2E8',
+                        cream: '#F8F9F5',
+                        sage: '#7D8C5F',
+                        gold: '#B5A369',
+                        deepgreen: '#6B7D4A',
+                        dark: '#5A6752'
+                    },
+                    fontFamily: {
+                        'arabic': ['Amiri', 'serif'],
+                        'display': ['Playfair Display', 'serif'],
+                        'body': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .achievement-card {
+            transition: all 0.3s ease;
+        }
+        .achievement-card:hover {
+            transform: translateY(-5px);
+        }
+        .achievement-locked {
+            filter: grayscale(1);
+            opacity: 0.7;
+        }
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .badge-glow {
+            box-shadow: 0 0 20px rgba(181, 163, 105, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-cream min-h-screen flex flex-col font-body">
+    <!-- Navigation -->
+    <nav class="bg-primary shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="bg-white p-2 rounded-full">
+                            <i class="fas fa-book-quran text-xl text-primary"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-display font-bold text-dark">My Qur'an Diary</h1>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex space-x-1 bg-white/90 rounded-lg p-1">
+                        <a href="index.html" class="nav-item px-4 py-2 rounded-md">
+                            <i class="fas fa-home mr-2"></i>Beranda
+                        </a>
+                        <a href="index.html#diary" class="nav-item px-4 py-2 rounded-md">
+                            <i class="fas fa-book-open mr-2"></i>Diary
+                        </a>
+                        <a href="index.html#progress" class="nav-item px-4 py-2 rounded-md">
+                            <i class="fas fa-chart-pie mr-2"></i>Progress
+                        </a>
+                        <a href="achievements.html" class="nav-item px-4 py-2 rounded-md active">
+                            <i class="fas fa-trophy mr-2"></i>Pencapaian
+                        </a>
+                    </div>
+
+                    <div class="flex items-center space-x-2 bg-white rounded-full pl-2 pr-4 py-1">
+                        <div class="bg-primary rounded-full p-2 flex items-center justify-center">
+                            <span class="text-white text-sm font-bold" id="user-initial">U</span>
+                        </div>
+                        <span class="font-medium text-dark" id="username-display">User</span>
+                        <button id="logout-btn" class="ml-2 text-dark hover:text-sage">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        <!-- Header Section -->
+        <section class="text-center mb-12">
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-2xl p-8 text-white shadow-lg">
+                <h1 class="text-4xl font-display font-bold mb-4">🏆 Pencapaian</h1>
+                <p class="text-light text-lg">Rayakan setiap langkah dalam perjalanan hafalan Qur'an-mu</p>
+                <div class="mt-6 flex justify-center space-x-8">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-gold">12</div>
+                        <div class="text-light text-sm">Pencapaian Terbuka</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-gold">8</div>
+                        <div class="text-light text-sm">Pencapaian Tertutup</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-gold">60%</div>
+                        <div class="text-light text-sm">Progress Total</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievement Categories -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Consistency Achievements -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center mb-6">
+                    <div class="bg-primary text-white p-3 rounded-full mr-4">
+                        <i class="fas fa-calendar-check text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-display font-bold text-dark">Konsistensi</h2>
+                        <p class="text-gray-600 text-sm">Terus berjalan meski pelan</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="achievement-card bg-light rounded-xl p-4 flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="bg-gold text-white p-2 rounded-full mr-3 badge-glow">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-dark">Pemanasan</h3>
+                                <p class="text-sm text-gray-600">Hafal 3 hari berturut-turut</p>
+                            </div>
+                        </div>
+                        <div class="text-gold">
+                            <i class="fas fa-check-circle text-xl"></i>
+                        </div>
+                    </div>
+
+                    <div class="achievement-card bg-light rounded-xl p-4 flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="bg-gold text-white p-2 rounded-full mr-3">
+                                <i class="fas fa-calendar-week"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-dark">Minggu Pertama</h3>
+                                <p class="text-sm text-gray-600">Hafal 7 hari berturut-turut</p>
+                            </div>
+                        </div>
+                        <div class="text-gold">
+                            <i class="fas fa-check-circle text-xl"></i>
+                        </div>
+                    </div>
+
+                    <div class="achievement-card bg-light rounded-xl p-4 flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="bg-gray-400 text-white p-2 rounded-full mr-3">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-dark">Pendaki Setia</h3>
+                                <p class="text-sm text-gray-600">Hafal 30 hari berturut-turut</p>
+                            </div>
+                        </div>
+                        <div class="text-gray-400">
+                            <i class="fas fa-lock text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone Achievements -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center mb-6">
+                    <div class="bg-deepgreen text-white p-3 rounded-full mr-4">
+                        <i class="fas fa-flag-checkered text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-display font-bold text-dark">Tonggak Pencapaian</h2>
+                        <p class="text-gray-600 text-sm">Tanda-tanda kemajuan</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="achievement-card bg-light rounded-xl p-4 flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="bg-gold text-white p-2 rounded-full mr-3 badge-glow">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-dark">Pembuka Jalan</h3>
+                                <p class="text-sm text-gray-600">Selesaikan 1 Juz pertama</p>
+                            </div>
+                        </div>
+                        <div class="text-gold">
+                            <i class="fas fa-check-circle text-xl"></i>
+                        </div>
+                    </div>
+
+                    <div class="achievement-card bg-light rounded-xl p-4 flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="bg-gold text-white p-2 rounded-full mr-3">
+                                <i class="fas fa-quran"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-dark">Separo Perjalanan</h3>
+                                <p class="text-sm text-gray-600">Selesaikan 15 Juz</p>
+                            </div>
+                        </div>
+                        <div class="text-gold">
+                            <i class="fas fa-check-circle text-xl"></i>
+                        </div>
+                    </div>
+
+                    <div class="achievement-card bg-light rounded-xl p-4 flex items-center justify-between achievement-locked">
+                        <div class="flex items-center">
+                            <div class="bg-gray-400 text-white p-2 rounded-full mr-3">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-dark">Hafiz/Hafizah</h3>
+                                <p class="text-sm text-gray-600">Selesaikan 30 Juz</p>
+                            </div>
+                        </div>
+                        <div class="text-gray-400">
+                            <i class="fas fa-lock text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Special Achievements -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center mb-6">
+                    <div class="bg-secondary text-white p-3 rounded-full mr-4">
+                        <i class="fas fa-gem text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-display font-bold text-dark">Pencapaian Spesial</h2>
+                        <p class="text-gray-600 text-sm">Momen-momen istimewa</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="achievement-card bg-light rounded-xl p-4 flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="bg-gold text-white p-2 rounded-full mr-3 badge-glow">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-dark">Early Bird</h3>
+                                <p class="text-sm text-gray-600">Hafal sebelum Subuh</p>
+                            </div>
+                        </div>
+                        <div class="text-gold">
+                            <i class="fas fa-check-circle text-xl"></i>
+                        </div>
+                    </div>
+
+                    <div class="achievement-card bg-light rounded-xl p-4 flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="bg-gold text-white p-2 rounded-full mr-3">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-dark">Surah Cinta</h3>
+                                <p class="text-sm text-gray-600">Hafal Surah Ar-Rahman</p>
+                            </div>
+                        </div>
+                        <div class="text-gold">
+                            <i class="fas fa-check-circle text-xl"></i>
+                        </div>
+                    </div>
+
+                    <div class="achievement-card bg-light rounded-xl p-4 flex items-center justify-between achievement-locked">
+                        <div class="flex items-center">
+                            <div class="bg-gray-400 text-white p-2 rounded-full mr-3">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-dark">Master of Juz Amma</h3>
+                                <p class="text-sm text-gray-600">Hafal seluruh Juz 30</p>
+                            </div>
+                        </div>
+                        <div class="text-gray-400">
+                            <i class="fas fa-lock text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Unlocks -->
+        <section class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-display font-bold text-dark mb-6">Pencapaian Terbaru</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-gradient-to-br from-gold to-yellow-400 rounded-xl p-4 text-center text-white fade-in">
+                    <div class="text-3xl mb-2">🔥</div>
+                    <h3 class="font-semibold">Semangat 7 Hari</h3>
+                    <p class="text-xs opacity-90">Baru saja terbuka!</p>
+                </div>
+                <div class="bg-gradient-to-br from-primary to-secondary rounded-xl p-4 text-center text-white fade-in">
+                    <div class="text-3xl mb-2">📖</div>
+                    <h3 class="font-semibold">Juz Pertama</h3>
+                    <p class="text-xs opacity-90">2 hari yang lalu</p>
+                </div>
+                <div class="bg-gradient-to-br from-deepgreen to-green-600 rounded-xl p-4 text-center text-white fade-in">
+                    <div class="text-3xl mb-2">🌅</div>
+                    <h3 class="font-semibold">Early Bird</h3>
+                    <p class="text-xs opacity-90">1 minggu yang lalu</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl p-4 text-center text-white fade-in">
+                    <div class="text-3xl mb-2">💝</div>
+                    <h3 class="font-semibold">Surah Cinta</h3>
+                    <p class="text-xs opacity-90">2 minggu yang lalu</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Overview -->
+        <section class="bg-white rounded-2xl shadow-lg p-6">
+            <h2 class="text-2xl font-display font-bold text-dark mb-6">Progress Pencapaian</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-dark mb-4">Kategori Progress</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-dark font-medium">Konsistensi</span>
+                                <span class="text-dark font-medium">67%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-primary h-3 rounded-full transition-all duration-500" style="width: 67%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-dark font-medium">Tonggak Pencapaian</span>
+                                <span class="text-dark font-medium">50%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-deepgreen h-3 rounded-full transition-all duration-500" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-dark font-medium">Pencapaian Spesial</span>
+                                <span class="text-dark font-medium">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-secondary h-3 rounded-full transition-all duration-500" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="relative w-48 h-48">
+                        <svg class="w-full h-full" viewBox="0 0 36 36">
+                            <path class="stroke-gray-200 fill-none stroke-2"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <path class="stroke-gold fill-none stroke-2 transition-all duration-1000"
+                                stroke-dasharray="60, 100"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <text x="18" y="20.5" class="text-4 font-bold fill-gold text-center" text-anchor="middle" dominant-baseline="central">60%</text>
+                        </svg>
+                    </div>
+                    <p class="text-center text-gray-600 mt-4">Progress Total Pencapaian</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-dark py-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0 text-center md:text-left">
+                    <p class="font-medium">My Qur'an Diary</p>
+                    <p class="text-dark/70 text-sm mt-1">Jadikan setiap hari bermakna dengan menghafal Al-Qur'an</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-dark/70 hover:text-dark transition duration-300">
+                        <i class="fas fa-share-alt"></i>
+                    </a>
+                    <a href="#" class="text-dark/70 hover:text-dark transition duration-300">
+                        <i class="fas fa-question-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data storage
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+        // Check login status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            updateUserDisplay();
+            initializeAchievements();
+        });
+
+        // Update user display
+        function updateUserDisplay() {
+            if (currentUser) {
+                const userInitial = document.getElementById('user-initial');
+                const usernameDisplay = document.getElementById('username-display');
+                
+                if (userInitial) userInitial.textContent = currentUser.name.charAt(0).toUpperCase();
+                if (usernameDisplay) usernameDisplay.textContent = currentUser.name;
+            }
+        }
+
+        // Handle logout
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            showNotification('Berhasil logout', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        });
+
+        // Initialize achievements
+        function initializeAchievements() {
+            // Add animation to recently unlocked achievements
+            const recentAchievements = document.querySelectorAll('.fade-in');
+            recentAchievements.forEach((achievement, index) => {
+                achievement.style.animationDelay = `${index * 0.2}s`;
+            });
+
+            // Add click effects to achievement cards
+            const achievementCards = document.querySelectorAll('.achievement-card');
+            achievementCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    if (!this.classList.contains('achievement-locked')) {
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                    }
+                });
+            });
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 fade-in ${
+                type === 'success' ? 'bg-deepgreen text-white' : 
+                type === 'error' ? 'bg-secondary text-white' : 'bg-primary text-white'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'} mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Sample data for achievements (in a real app, this would come from backend/localStorage)
+        const achievementsData = {
+            totalUnlocked: 12,
+            totalLocked: 8,
+            totalProgress: 60,
+            categories: {
+                consistency: 67,
+                milestones: 50,
+                special: 75
+            }
+        };
+
+        // Update progress circles
+        function updateProgressCircles() {
+            const totalProgressCircle = document.querySelector('.stroke-gold');
+            const circumference = 2 * Math.PI * 15.9155;
+            const offset = circumference - (achievementsData.totalProgress / 100) * circumference;
+            totalProgressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+            totalProgressCircle.style.strokeDashoffset = offset;
+        }
+
+        // Initialize on load
+        updateProgressCircles();
+    </script>
+</body>
+</html>
