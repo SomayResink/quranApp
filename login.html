@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - My Qur'an Diary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B4513',
+                        secondary: '#D2691E',
+                        accent: '#CD853F',
+                        light: '#FAEBD7',
+                        cream: '#FFF8DC',
+                        sage: '#87A96B',
+                        gold: '#D4AF37',
+                        deepgreen: '#2E8B57'
+                    },
+                    fontFamily: {
+                        'arabic': ['Amiri', 'serif'],
+                        'display': ['Playfair Display', 'serif'],
+                        'body': ['Poppins', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'paper-texture': "url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%23f5f5f5\" fill-opacity=\"0.4\" fill-rule=\"evenodd\"/%3E%3C/svg%3E')",
+                        'islamic-pattern': "url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%238B4513\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            text-align: right;
+            direction: rtl;
+        }
+        .login-container {
+            background: linear-gradient(135deg, #FAEBD7 0%, #FFF8DC 100%);
+            min-height: 100vh;
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(139, 69, 19, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .floating-btn {
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+            transition: all 0.3s ease;
+        }
+        .floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto;
+        }
+        .user-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .user-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.15);
+        }
+    </style>
+</head>
+<body class="login-container bg-paper-texture">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="login-card w-full max-w-4xl fade-in">
+            <!-- Header Section -->
+            <div class="bg-gradient-to-r from-primary to-secondary p-8 text-white text-center">
+                <div class="flex items-center justify-center space-x-4 mb-4">
+                    <div class="bg-white p-3 rounded-full shadow-lg">
+                        <i class="fas fa-book-quran text-3xl text-primary"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-display font-bold">My Qur'an Diary</h1>
+                        <p class="text-light mt-2">Jurnal Hafalan Digital Pribadi</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Login Form -->
+                    <div class="space-y-6">
+                        <div>
+                            <h2 class="text-2xl font-display font-bold text-primary mb-2">Masuk ke Diary-mu</h2>
+                            <p class="text-gray-600">Pilih pengguna atau buat profil baru untuk mulai mencatat perjalanan hafalan Qur'an-mu</p>
+                        </div>
+
+                        <form id="login-form" class="space-y-4">
+                            <div>
+                                <label for="username" class="block text-gray-700 mb-2 font-medium">Nama Pengguna</label>
+                                <input 
+                                    type="text" 
+                                    id="username" 
+                                    class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition duration-300 bg-white"
+                                    placeholder="Masukkan nama kamu..."
+                                    required
+                                >
+                            </div>
+
+                            <button 
+                                type="submit" 
+                                class="w-full bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white font-medium py-4 px-6 rounded-xl transition duration-300 flex items-center justify-center shadow-md floating-btn"
+                            >
+                                <i class="fas fa-sign-in-alt mr-2"></i> Masuk ke Diary
+                            </button>
+                        </form>
+
+                        <div class="text-center">
+                            <p class="text-gray-600">Atau pilih dari pengguna yang sudah ada:</p>
+                        </div>
+                    </div>
+
+                    <!-- Existing Users & Features -->
+                    <div class="space-y-6">
+                        <!-- Existing Users -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-4">Pengguna Terdaftar</h3>
+                            <div id="existing-users" class="grid grid-cols-2 gap-4 max-h-48 overflow-y-auto p-2">
+                                <!-- Users will be populated here -->
+                            </div>
+                        </div>
+
+                        <!-- Features Preview -->
+                        <div class="bg-light rounded-xl p-6 border-l-4 border-primary">
+                            <h3 class="text-lg font-semibold text-primary mb-3">Fitur My Qur'an Diary</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-deepgreen mr-2"></i>
+                                    <span>Catat hafalan harian dengan mudah</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-deepgreen mr-2"></i>
+                                    <span>Lihat progress dan statistik hafalan</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-deepgreen mr-2"></i>
+                                    <span>Dapatkan ayat inspirasi setiap hari</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-deepgreen mr-2"></i>
+                                    <span>Lacak mood dan perasaan saat menghafal</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ayat Inspirasi -->
+                <div class="mt-8 p-6 bg-gradient-to-r from-sage to-deepgreen rounded-xl text-white">
+                    <div class="text-center">
+                        <div class="arabic-text mb-4 text-white/90">
+                            وَقَالَ رَبُّكُمُ ٱدْعُونِىٓ أَسْتَجِبْ لَكُمْ
+                        </div>
+                        <div class="text-light mb-2 italic">
+                            "Dan Tuhanmu berfirman: 'Berdoalah kepada-Ku, niscaya akan Kuperkenankan bagimu'."
+                        </div>
+                        <div class="font-medium">
+                            (Ghafir: 60)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage for users
+        let users = JSON.parse(localStorage.getItem('quranDiaryUsers')) || [
+            { id: 1, name: "Ahmad", lastLogin: new Date().toISOString() },
+            { id: 2, name: "Fatimah", lastLogin: new Date().toISOString() },
+            { id: 3, name: "Ibrahim", lastLogin: new Date().toISOString() }
+        ];
+
+        // DOM Elements
+        const loginForm = document.getElementById('login-form');
+        const usernameInput = document.getElementById('username');
+        const existingUsersContainer = document.getElementById('existing-users');
+
+        // Initialize the login page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Populate existing users
+            renderExistingUsers();
+            
+            // Focus on username input
+            usernameInput.focus();
+        });
+
+        // Render existing users
+        function renderExistingUsers() {
+            if (users.length === 0) {
+                existingUsersContainer.innerHTML = `
+                    <div class="col-span-2 text-center py-4 text-gray-500">
+                        <p>Belum ada pengguna terdaftar</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const usersHTML = users.map(user => {
+                const initials = user.name.charAt(0).toUpperCase();
+                const lastLogin = new Date(user.lastLogin).toLocaleDateString('id-ID');
+                
+                return `
+                    <div class="user-card bg-white p-4 rounded-lg border border-gray-200 text-center" data-user-id="${user.id}">
+                        <div class="user-avatar mb-3">
+                            ${initials}
+                        </div>
+                        <h4 class="font-semibold text-gray-800">${user.name}</h4>
+                        <p class="text-xs text-gray-500 mt-1">Login terakhir: ${lastLogin}</p>
+                    </div>
+                `;
+            }).join('');
+
+            existingUsersContainer.innerHTML = usersHTML;
+
+            // Add click event to user cards
+            document.querySelectorAll('.user-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const userId = this.getAttribute('data-user-id');
+                    const user = users.find(u => u.id == userId);
+                    if (user) {
+                        loginUser(user.name);
+                    }
+                });
+            });
+        }
+
+        // Handle login form submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = usernameInput.value.trim();
+            
+            if (!username) {
+                showNotification('Harap masukkan nama pengguna', 'error');
+                return;
+            }
+            
+            loginUser(username);
+        });
+
+        // Login user
+        function loginUser(username) {
+            // Update or add user
+            let user = users.find(u => u.name.toLowerCase() === username.toLowerCase());
+            
+            if (user) {
+                // Update last login
+                user.lastLogin = new Date().toISOString();
+            } else {
+                // Create new user
+                user = {
+                    id: Date.now(),
+                    name: username,
+                    lastLogin: new Date().toISOString()
+                };
+                users.push(user);
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('quranDiaryUsers', JSON.stringify(users));
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            
+            // Show success message
+            showNotification(`Selamat datang, ${username}!`, 'success');
+            
+            // Redirect to main page after a short delay
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            // Remove existing notifications
+            const existingNotification = document.querySelector('.login-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `login-notification fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 fade-in ${
+                type === 'success' ? 'bg-deepgreen text-white' : 'bg-secondary text-white'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            // Add to DOM
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('fade-in');
+                notification.classList.add('fade-out');
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 500);
+            }, 3000);
+        }
+
+        // Add some sample users if none exist
+        if (users.length === 0) {
+            users = [
+                { id: 1, name: "Ahmad", lastLogin: new Date().toISOString() },
+                { id: 2, name: "Fatimah", lastLogin: new Date().toISOString() },
+                { id: 3, name: "Ibrahim", lastLogin: new Date().toISOString() }
+            ];
+            localStorage.setItem('quranDiaryUsers', JSON.stringify(users));
+        }
+    </script>
+</body>
+</html>
