@@ -130,13 +130,18 @@
                 <span id="hijri-date" class="text-sm"></span>
               </div>
             </div>
+            <!-- Langsung ganti di header (hapus yang lama, ganti dengan ini) -->
             <div
               class="flex items-center space-x-2 bg-white/20 rounded-full pl-2 pr-4 py-1 backdrop-blur-sm"
             >
-              <div class="bg-white rounded-full p-1">
-                <i class="fas fa-user text-primary text-sm"></i>
+              <div
+                class="bg-white rounded-full p-2 flex items-center justify-center"
+              >
+                <span id="user-initial" class="text-primary text-sm font-bold"
+                  >U</span
+                >
               </div>
-              <span class="font-medium">Hafiz/Hafizah</span>
+              <span id="username" class="font-medium">User</span>
             </div>
           </div>
         </div>
@@ -917,6 +922,16 @@
         }
       }
 
+      // Versi lebih sederhana
+      document.addEventListener("DOMContentLoaded", function () {
+        const userInitial = document.getElementById("user-initial");
+        const username = document.getElementById("username");
+
+        if (userInitial && username && currentUser) {
+          userInitial.textContent = currentUser.name.charAt(0).toUpperCase();
+          username.textContent = currentUser.name;
+        }
+      });
       // Add logout functionality
       function addLogoutButton() {
         const header = document.querySelector("header");
