@@ -12,7 +12,7 @@ Aplikasi ini bisa dijalankan langsung di browser menggunakan **Live Server** (VS
 
 * 📚 Menampilkan daftar surah dan ayat Al-Qur’an
 * 🔍 Fitur pencarian surah
-* 🌙 Mode gelap & terang (jika tersedia)
+* 🌙 Mode gelap & terang 
 * ⚡ Ringan dan bisa dijalankan secara offline
 
 ---
